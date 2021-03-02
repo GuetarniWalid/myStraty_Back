@@ -1,0 +1,386 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta content="telephone=no" name="format-detection" />
+        <title>Email Template</title>
+       
+
+        <style type="text/css" media="screen">
+                @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800);
+
+                /* Linked Styles */
+                body { padding:0 !important; margin:0 !important; display:block !important; width:100% !important; background: #f3f7fd; -webkit-text-size-adjust:none }
+                a { color:#999999; text-decoration:none }
+
+                /* Campaign Monitor wraps the text in editor in paragraphs. In order to preserve design spacing we remove the padding/margin */
+                p { padding:0 !important; margin:0 !important }
+
+                #outlook a { padding: 0; } /* Force Outlook to provide a "view in browser" button. */
+
+                /* Mobile styles */
+                @media only screen and (max-device-width: 480px), only screen and (max-width: 480px) {
+                        div[class="h2"] { font-size:14px; }
+                        div[class='mobile-br-15'] { height: 15px !important; }
+                        table[class='w285'] { width: 285px !important; }
+                        td[class='m-td'] { display: none !important; width: 0 !important; height: 0 !important; }
+                        td[class='column'] { width: 285px !important; float: left !important; display: block !important; }
+                        div[class='logo'], div[class='header'] { text-align: center !important; }
+                        div[class='header'] { padding-bottom: 15px; }
+
+                        td[class='h2'], div[class='h2'] { font-size: 15px !important; line-height: 19px !important; text-align: center !important; }
+                        td[class='green-big'], div[class='green-big'] { text-align: center !important; padding-top: 15px; }
+
+                        div[class='wgmail'] img { min-width: 320px !important; width: 320px !important; }
+                }
+        </style>
+</head>
+<body class="body" style="padding:0 !important; margin:0 !important; display:block !important; width:100% !important; background:#e7effc; -webkit-text-size-adjust:none" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+
+<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor=" #f3f7fd">
+        <tr>
+                <td align="center" valign="top">
+                        <!-- Header -->
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#e7effc">
+                                <tr>
+                                        <td align="center">
+                                                <table width="580" border="0" cellspacing="0" cellpadding="0" class="w285">
+                                                        <tr>
+                                                                <td class="column">
+                                                                        <div class="logo" style="font-size:35px; background:#e7effc; line-height:90px; text-align:left; color:#3276eb; font-weight:700"><a href="{{frontUrl}}">MyStraty</a></div>
+                                                                </td>
+                                                                <td class="column">
+                                                                        <div class="header" style="color:#3276eb; ; font-weight:600; font-size:16px; line-height:18px; text-align:right">{{date}}</div>
+                                                                </td>
+                                                        </tr>
+                                                </table>
+                                        </td>
+                                </tr>
+                        </table>
+                        <!-- END Header -->
+                        <div style="font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="height:30px" alt="" /></div>
+
+
+                        <p style="font-size:20px; line-height:90px; height:90px">Voici les news du jour !</p>
+
+
+                        <!-- Content -->
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                <tr>
+                                        <td align="center">
+                                                <table width="580" border="0" cellspacing="0" cellpadding="0" class="w285">
+                                                        <tr>
+                                                                <td>
+
+
+                                                                        <!-- REVENUES -->
+
+                                                                        <div class="h1" style="color:#3b3c3d; ; font-size:25px; line-height:29px; text-align:center; font-weight:600; text-transform:uppercase">Revenue journalier</div>
+                                                                        <div style="font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="height:30px" alt="" /></div>
+
+
+                                                                        <!-- Box -->
+                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                                <tr>
+                                                                                        <td>
+                                                                                                <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="height:20px" alt="" /></div>
+
+                                                                                                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                        <tr>
+                                                                                                                <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="32"></td>
+                                                                                                                <td class="column"><div class="h2" style="color:#3b3c3d; font-size:23px; line-height:27px; text-align:left; font-weight:600"><span style="color:#9CB0D4;">Votre montant sous gestion:</span></div></td>
+                                                                                                                <td class="column"><div class="green-big" style="color:#3276eb; font-weight:800; font-size:46px; line-height:50px; text-align:right">{{currentWalletFormatted}} €</div></td>
+                                                                                                                <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="32"></td>
+                                                                                                        </tr>
+                                                                                                </table>
+                                                                                                <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="height:20px" alt="" /></div>
+
+                                                                                        </td>
+                                                                                </tr>
+                                                                        </table>
+                                                                        <!-- END Box -->
+                                                                        <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                        <!-- Two box -->
+                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                <tr>
+                                                                                        <td valign="top" width="285" class="column">
+                                                                                                <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                                                        <tr>
+                                                                                                                <td>
+                                                                                                                        <div style="font-size:0pt; line-height:0pt; height:15px"><img src="images/empty.gif" width="1" height="15" style="height:15px" alt="" /></div>
+
+                                                                                                                        <div class="text" style="color:#3b3c3d; ; font-weight:600; font-size:15px; line-height:19px; text-align:center">
+                                                                                                                                Depuis hier en €
+                                                                                                                                <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                                @if(priceProgressionInPercentFormatted >= 1)
+                                                                                                                                <div class="blue-big" style="color:#12AE47; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                                @else 
+                                                                                                                                <div class="blue-big" style="color:#ff7c89; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                                @endif                                                                                                                                        
+                                                                                                                                {{priceProgressionFormatted}} €
+                                                                                                                                </div>
+                                                                                                                                <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                        </div>
+                                                                                                                        <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                </td>
+                                                                                                        </tr>
+                                                                                                </table>
+                                                                                                <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                        </td>
+                                                                                        <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="11"></td>
+                                                                                        <td valign="top" width="285" class="column">
+                                                                                                <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                                                        <tr>
+                                                                                                                <td>
+                                                                                                                        <div style="font-size:0pt; line-height:0pt; height:15px"><img src="images/empty.gif" width="1" height="15" style="height:15px" alt="" /></div>
+
+                                                                                                                        <div class="text" style="color:#3b3c3d; ; font-weight:600; font-size:15px; line-height:19px; text-align:center">
+                                                                                                                                Depuis hier en %
+                                                                                                                                <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+                                                                                                                                
+                                                                                                                                @if(priceProgressionInPercentFormatted >= 1)
+                                                                                                                                <div class="blue-big" style="color:#12AE47; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                                @else 
+                                                                                                                                <div class="blue-big" style="color:#ff7c89; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                                @endif
+                                                                                                                                        {{priceProgressionInPercentFormatted}} %
+                                                                                                                                </div>
+                                                                                                                                <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                        </div>
+                                                                                                                        <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                </td>
+                                                                                                        </tr>
+                                                                                                </table>
+                                                                                                <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                        </td>
+                                                                                </tr>
+                                                                        </table>
+                                                                        <div style="font-size:0pt; line-height:0pt; height:27px"><img src="images/empty.gif" width="1" height="27" style="height:27px" alt="" /></div>
+                                                                        <!-- Two box -->
+
+
+
+                                                                        <!-- POSITIONS -->
+
+                                                                        <div class="h1" style="color:#3b3c3d; ; font-size:25px; line-height:29px; text-align:center; font-weight:600; text-transform:uppercase">Position du jour</div>
+                                                                        <div style="font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="height:30px" alt="" /></div>
+
+                                                                        @each(strategy in stratPositions)
+                                                                        <!-- Box Position -->
+                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                            <tr>
+                                                                                    <td>
+                                                                                            <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="height:20px" alt="" /></div>
+
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                    <tr>
+                                                                                                            <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="32"></td>
+                                                                                                            <td class="column"><div class="h2" style="color:#3b3c3d; ; font-size:23px; line-height:27px; text-align:left; font-weight:600"><span style="color:#9CB0D4;">Pour la stratégie:</span> &nbsp;&nbsp;{{strategy.title}}</div></td>
+                                                                                                            <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="32"></td>
+                                                                                                    </tr>
+                                                                                            </table>
+                                                                                            <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="height:20px" alt="" /></div>
+
+                                                                                    </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        <!-- END Box -->
+                                                                        <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+
+                                                                        <!-- Three box Position -->
+                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                            <tr>
+                                                                                    @each((value, currency) in strategy.position)
+                                                                                    <td valign="top" width="285" class="column">
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                                                    <tr>
+                                                                                                            <td>
+                                                                                                                    <div style="font-size:0pt; line-height:0pt; height:15px"><img src="images/empty.gif" width="1" height="15" style="height:15px" alt="" /></div>
+
+                                                                                                                    <div class="text" style="color:#3b3c3d; ; font-weight:600; font-size:15px; line-height:19px; text-align:center">
+                                                                                                                            {{currency}}
+                                                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                            @if(value === '0 %')
+                                                                                                                            <div class="blue-big" style="color:#9cb0d4; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                            @else 
+                                                                                                                            <div class="blue-big" style="color:#3276eb; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                            @endif
+                                                                                                                                    {{value}}
+                                                                                                                            </div>
+                                                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                    </div>
+                                                                                                                    <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                            </td>
+                                                                                                    </tr>
+                                                                                            </table>
+                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                    </td>
+                                                                                    <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="11"></td>
+                                                                                    @endeach
+                                                                            </tr>
+                                                                        </table>
+                                                                        <div style="font-size:0pt; line-height:0pt; height:27px"><img src="images/empty.gif" width="1" height="27" style="height:27px" alt="" /></div>
+                                                                        <!-- Two box -->
+                                                                        @endeach
+
+
+
+
+                                                                        <!-- TRADES -->
+
+                                                                        <div class="h1" style="color:#3b3c3d; ; font-size:25px; line-height:29px; text-align:center; font-weight:600; text-transform:uppercase">Trades réalisés</div>
+                                                                        <div style="font-size:0pt; line-height:0pt; height:30px"><img src="images/empty.gif" width="1" height="30" style="height:30px" alt="" /></div>
+
+                                                                        @each(trade in trades)
+                                                                         <!-- Box Trade-->
+                                                                         <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                            <tr>
+                                                                                    <td>
+                                                                                            <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="height:20px" alt="" /></div>
+
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                                                    <tr>
+                                                                                                            <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="32"></td>
+                                                                                                            <td class="column"><div class="h2" style="color:#3b3c3d; ; font-size:23px; line-height:27px; text-align:left; font-weight:600"><span style="color:#9CB0D4;">Pour la stratégie:</span> &nbsp;&nbsp;{{trade.strategyTitle}}</div></td>
+                                                                                                            <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="32"></td>
+                                                                                                    </tr>
+                                                                                            </table>
+                                                                                            <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="height:20px" alt="" /></div>
+
+                                                                                    </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        <!-- END Box -->
+                                                                        <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+
+                                                                        @if(trade.tradeExist)
+                                                                        <!-- Three box Trade-->
+                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                            <tr>
+                                                                                    <td valign="top" width="285" class="column">
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                                                    <tr>
+                                                                                                            <td>
+                                                                                                                    <div style="font-size:0pt; line-height:0pt; height:15px"><img src="images/empty.gif" width="1" height="15" style="height:15px" alt="" /></div>
+
+                                                                                                                    <div class="text" style="color:#3b3c3d; ; font-weight:600; font-size:15px; line-height:19px; text-align:center">
+                                                                                                                            Monnaie vendu
+                                                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                            <div class="blue-big" style="color:#ff7c89; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                                    {{trade.currencySell}}
+                                                                                                                            </div>
+                                                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                    </div>
+                                                                                                                    <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                            </td>
+                                                                                                    </tr>
+                                                                                            </table>
+                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                    </td>
+                                                                                    <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="11"></td>
+
+                                                                                    <td valign="top" width="285" class="column">
+                                                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                                                <tr>
+                                                                                                        <td>
+                                                                                                                <div style="font-size:0pt; line-height:0pt; height:15px"><img src="images/empty.gif" width="1" height="15" style="height:15px" alt="" /></div>
+
+                                                                                                                <div class="text" style="color:#3b3c3d; ; font-weight:600; font-size:15px; line-height:19px; text-align:center">
+                                                                                                                        Pour
+                                                                                                                        <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                        <div class="blue-big" style="color:#3276eb; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                                {{trade.amount}}
+                                                                                                                        </div>
+                                                                                                                        <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                </div>
+                                                                                                                <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                        </td>
+                                                                                                </tr>
+                                                                                        </table>
+                                                                                        <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                </td>
+                                                                                <td class="m-td" style="font-size:0pt; line-height:0pt; text-align:left" width="11"></td>
+
+
+                                                                                    <td valign="top" width="285" class="column">
+                                                                                            <table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#ffffff" class="box" style="box-shadow:0 2px 0 #dfe6e9; border-radius:4px">
+                                                                                                    <tr>
+                                                                                                            <td>
+                                                                                                                    <div style="font-size:0pt; line-height:0pt; height:15px"><img src="images/empty.gif" width="1" height="15" style="height:15px" alt="" /></div>
+
+                                                                                                                    <div class="text" style="color:#3b3c3d; ; font-weight:600; font-size:15px; line-height:19px; text-align:center">
+                                                                                                                            Monnaie acheté
+                                                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                            <div class="blue-big" style="color:#12AE47; ; font-weight:800; font-size:45px; line-height:49px; text-align:center">
+                                                                                                                                    {{trade.currencyBuy}}
+                                                                                                                            </div>
+                                                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                                    </div>
+                                                                                                                    <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                                            </td>
+                                                                                                    </tr>
+                                                                                            </table>
+                                                                                            <div style="font-size:0pt; line-height:0pt; height:10px"><img src="images/empty.gif" width="1" height="10" style="height:10px" alt="" /></div>
+
+                                                                                    </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                        @else
+                                                                        <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="30" style="height:30px" alt="" /></div>
+                                                                        <div class="h4" style="color:#242e35; ; font-size:17px; line-height:17px; text-align:center; font-weight:600; text-transform:uppercase"><span style="color:#9CB0D4;">Aucun trade réalisé</span></div>
+                                                                        <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="30" style="height:30px" alt="" /></div>
+                                                                        @endif
+
+
+                                                                        <div style="font-size:0pt; line-height:0pt; height:27px"><img src="images/empty.gif" width="1" height="27" style="height:27px" alt="" /></div>
+                                                                        <!-- Two box -->
+                                                                        @endeach
+                                                                </td>
+                                                        </tr>
+                                                </table>
+                                        </td>
+                                </tr>
+                        </table>
+                        <!-- END Content -->
+                        <div style="font-size:0pt; line-height:0pt; height:20px"><img src="images/empty.gif" width="1" height="20" style="height:20px" alt="" /></div>
+
+                        <p style="font-size:20px; line-height:30px; height:30px">Voila pour les news !</p>
+                        <p style="font-size:20px; line-height:30px; height:30px">Nous vous rappelons qu'il faut rester sur une vision long terme pour apprécier les véritables bénéfices d'une stratégie à basse fréquence.
+                        </p>
+                        <p style="font-size:20px; line-height:30px; height:30px">Bonne journée !</p>
+                </td>
+        </tr>
+</table>
+
+
+
+<div class="wgmail" style="font-size:0pt; line-height:0pt; text-align:center"><img src="images/empty.gif" width="640" height="1" style="min-width:640px" alt="" border="0" /></div>
+
+</body>
+</html>

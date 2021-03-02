@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>Controllers/Http/AssetController.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="https://github.com/your-github-username/pet-adoption-center-sdk" target="_blank" class="menu-item" id="repository" >Github repo</a></h2><h3>Classes</h3><ul><li><a href="Controllers.Http.AssetController.html">Controllers.Http.AssetController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.AssetController.html#allDaily">allDaily</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.AssetController.html#byStrategy">byStrategy</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.AssetController.html#sufficient">sufficient</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.AssetController.html#total">total</a></li></ul></li><li><a href="Controllers.Http.ChatController.html">Controllers.Http.ChatController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.ChatController.html#all">all</a></li></ul></li><li><a href="Controllers.Http.ExchangeController.html">Controllers.Http.ExchangeController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.ExchangeController.html#info">info</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.ExchangeController.html#save">save</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.ExchangeController.html#USDTBalance">USDTBalance</a></li></ul></li><li><a href="Controllers.Http.PositionController.html">Controllers.Http.PositionController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.PositionController.html#current">current</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.PositionController.html#get">get</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.PositionController.html#performance">performance</a></li></ul></li><li><a href="Controllers.Http.SettingController.html">Controllers.Http.SettingController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.SettingController.html#get">get</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.SettingController.html#post">post</a></li></ul></li><li><a href="Controllers.Http.StrategyController.html">Controllers.Http.StrategyController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.StrategyController.html#index">index</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.StrategyController.html#isActive">isActive</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.StrategyController.html#start">start</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.StrategyController.html#stop">stop</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.StrategyController.html#userStrategyInfo">userStrategyInfo</a></li></ul></li><li><a href="Controllers.Http.SubscriptionController.html">Controllers.Http.SubscriptionController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.SubscriptionController.html#createCheckoutSession">createCheckoutSession</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.SubscriptionController.html#customerPortal">customerPortal</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.SubscriptionController.html#index">index</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.SubscriptionController.html#retrievePlan">retrievePlan</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.SubscriptionController.html#webhook">webhook</a></li></ul></li><li><a href="Controllers.Http.TradeController.html">Controllers.Http.TradeController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.TradeController.html#all">all</a></li></ul></li><li><a href="Controllers.Http.UserController.html">Controllers.Http.UserController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Http.UserController.html#connexion">connexion</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.UserController.html#forget">forget</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.UserController.html#forgetValidation">forgetValidation</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.UserController.html#get">get</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.UserController.html#inscription">inscription</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.UserController.html#resendMail">resendMail</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.UserController.html#update">update</a></li><li data-type='method' style='display: none;'><a href="Controllers.Http.UserController.html#validation">validation</a></li></ul></li><li><a href="Controllers.Ws.ChatController.html">Controllers.Ws.ChatController</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Controllers.Ws.ChatController.html#onMessage">onMessage</a></li></ul></li><li><a href="Middleware.Authentication.html">Middleware.Authentication</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Middleware.Authentication.html#handle">handle</a></li></ul></li><li><a href="Middleware.CheckJwtTimeExpiry.html">Middleware.CheckJwtTimeExpiry</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Middleware.CheckJwtTimeExpiry.html#handle">handle</a></li></ul></li><li><a href="Middleware.CheckSubscriptionValidity.html">Middleware.CheckSubscriptionValidity</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Middleware.CheckSubscriptionValidity.html#handle">handle</a></li></ul></li><li><a href="Models.Asset.html">Models.Asset</a><ul class='members'><li data-type='member' style='display: none;'><a href="Models.Asset.html#.createdAtColumn">createdAtColumn</a></li><li data-type='member' style='display: none;'><a href="Models.Asset.html#.updatedAtColumn">updatedAtColumn</a></li></ul></li><li><a href="Models.Chat.html">Models.Chat</a><ul class='members'><li data-type='member' style='display: none;'><a href="Models.Chat.html#.updatedAtColumn">updatedAtColumn</a></li></ul></li><li><a href="Models.Exchange.html">Models.Exchange</a><ul class='members'><li data-type='member' style='display: none;'><a href="Models.Exchange.html#.createdAtColumn">createdAtColumn</a></li><li data-type='member' style='display: none;'><a href="Models.Exchange.html#.updatedAtColumn">updatedAtColumn</a></li></ul><ul class='methods'><li data-type='method' style='display: none;'><a href="Models.Exchange.html#.scopeHasStrategies">scopeHasStrategies</a></li><li data-type='method' style='display: none;'><a href="Models.Exchange.html#strategies">strategies</a></li></ul></li><li><a href="Models.Napoleon.html">Models.Napoleon</a></li><li><a href="Models.Setting.html">Models.Setting</a><ul class='members'><li data-type='member' style='display: none;'><a href="Models.Setting.html#.createdAtColumn">createdAtColumn</a></li><li data-type='member' style='display: none;'><a href="Models.Setting.html#.updatedAtColumn">updatedAtColumn</a></li></ul></li><li><a href="Models.Strategy.html">Models.Strategy</a><ul class='methods'><li data-type='method' style='display: none;'><a href="Models.Strategy.html#.scopeHasTrades">scopeHasTrades</a></li><li data-type='method' style='display: none;'><a href="Models.Strategy.html#assets">assets</a></li><li data-type='method' style='display: none;'><a href="Models.Strategy.html#trades">trades</a></li></ul></li><li><a href="Models.Subscription.html">Models.Subscription</a></li><li><a href="Models.Token.html">Models.Token</a></li><li><a href="Models.Trade.html">Models.Trade</a><ul class='members'><li data-type='member' style='display: none;'><a href="Models.Trade.html#.updatedAtColumn">updatedAtColumn</a></li></ul></li><li><a href="Models.User.html">Models.User</a><ul class='members'><li data-type='member' style='display: none;'><a href="Models.User.html#.hidden">hidden</a></li></ul><ul class='methods'><li data-type='method' style='display: none;'><a href="Models.User.html#.boot">boot</a></li></ul></li></ul><h3>Namespaces</h3><ul><li><a href="Controllers.Http.html">Controllers.Http</a></li><li><a href="Controllers.Ws.html">Controllers.Ws</a></li><li><a href="Middleware.html">Middleware</a></li><li><a href="Models.html">Models</a></li></ul><h3>Global</h3><ul><li><a href="global.html#AuthentificationFailedException">AuthentificationFailedException</a></li><li><a href="global.html#connexionResponse">connexionResponse</a></li><li><a href="global.html#ctx">ctx</a></li><li><a href="global.html#currencyByDay">currencyByDay</a></li><li><a href="global.html#customerPortalError">customerPortalError</a></li><li><a href="global.html#customerPortalErrorDetail">customerPortalErrorDetail</a></li><li><a href="global.html#enoughData">enoughData</a></li><li><a href="global.html#exchange">exchange</a></li><li><a href="global.html#exchanges">exchanges</a></li><li><a href="global.html#formValidationFailed">formValidationFailed</a></li><li><a href="global.html#formValidationMDetails">formValidationMDetails</a></li><li><a href="global.html#isActive">isActive</a></li><li><a href="global.html#messages">messages</a></li><li><a href="global.html#napoleon">napoleon</a></li><li><a href="global.html#performance">performance</a></li><li><a href="global.html#position">position</a></li><li><a href="global.html#positions">positions</a></li><li><a href="global.html#registrationValidation">registrationValidation</a></li><li><a href="global.html#saveExchangeResponse">saveExchangeResponse</a></li><li><a href="global.html#sessionId">sessionId</a></li><li><a href="global.html#setting">setting</a></li><li><a href="global.html#settings">settings</a></li><li><a href="global.html#startedStrategy">startedStrategy</a></li><li><a href="global.html#startResponse">startResponse</a></li><li><a href="global.html#strategies">strategies</a></li><li><a href="global.html#strategy">strategy</a></li><li><a href="global.html#StripeCreateCheckoutSessionException">StripeCreateCheckoutSessionException</a></li><li><a href="global.html#StripeCreateCheckoutSessionExceptionDetails">StripeCreateCheckoutSessionExceptionDetails</a></li><li><a href="global.html#subscription">subscription</a></li><li><a href="global.html#subscriptionData">subscriptionData</a></li><li><a href="global.html#SubscriptionExpiryException">SubscriptionExpiryException</a></li><li><a href="global.html#success">success</a></li><li><a href="global.html#TokenExpiryException">TokenExpiryException</a></li><li><a href="global.html#tokens">tokens</a></li><li><a href="global.html#trade">trade</a></li><li><a href="global.html#urlToRedirect">urlToRedirect</a></li><li><a href="global.html#user">user</a></li><li><a href="global.html#websocketMessage">websocketMessage</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">Controllers/Http/AssetController.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+const User = use("App/Models/User");
+const Asset = use("App/Models/Asset");
+const Database = use("Database");
+const Helpers = use("Helpers");
+const axios = require("axios").default;
+const fs = require("fs");
+
+/**
+ * @namespace Controllers.Http
+ */
+
+/**
+ * @memberof Controllers.Http
+ * @classDesc This is the Controller for routes that begin by "[Domain name]/api/v1/assets". Desserve data related to assets.
+ */
+class AssetController {
+  /**
+   * Context object distributed to all methods
+   * @typedef {object} ctx
+   * @property {object} params - Url parameter
+   * @property {object} request - Property present in request body
+   * @property {object} response - Object to make an return responses
+   * @property {object} auth - Object that contains multiple methods related to authentication
+   * @property {object} [socket] - Object that contains multiple methods related to websocket
+   */
+
+  /**
+   * Amount of wallet converted in each currency and by day
+   * @typedef {object} currencyByDay
+   * @property {number|string} BTC - Amount of BTC
+   * @property {number|string} ETH - Amount of ETH
+   * @property {number|string} USDT - Amount of USDT
+   * @property {string} date - date
+   */
+
+  /**
+   * Amount of wallet converted in each currency and by day
+   * @typedef {object} strategy
+   * @property {number} id - The strategy id
+   * @property {string} title - Strategy title
+   * @property {number} btc - Current amount of btc in strategy
+   * @property {number} eth - Current amount of eth in strategy
+   * @property {number} usdt - Current amount of usdt in strategy
+   * @property {string} strategy - Strategy reference
+   * @property {string} position - A Json stringify that contains current position
+   * @property {number} exchange_id - Id of strategy's exchange
+   * @property {boolean} active - If strategy is active
+   * @property {string} frequency - The frequency of trade
+   * @property {string} created_at - Date at which the strategy started
+   * @property {string} updated_at - Date on which the strategy was updated
+   */
+
+  /**
+   * If the user has enough data, more than one
+   * @typedef {object} enoughData
+   * @property {boolean} enoughData - does the user have enough data ?
+   */
+
+  /**
+   * @description Gives all user assets filter and sorted by day
+   * @param {ctx} ctx - Context object
+   * @param {number|string} ctx.params.id - User's id
+   * @returns {Array&lt;currencyByDay>} Array of currencyByDay
+   */
+  async allDaily({ params }) {
+    //get user's data
+    let user = await User.query()
+      .where("id", params.id)
+      .with("exchanges.strategies.assets")
+      .fetch();
+    user = user.toJSON();
+
+    //push all user's asset in this array
+    const assets = [];
+    user[0].exchanges.map((exchange) => {
+      exchange.strategies.map((strategy) => {
+        strategy.assets.map((asset) => {
+          assets.push(asset);
+        });
+      });
+    });
+
+    //parse all assets data
+    const assetsParsed = assets.map((asset) => {
+      return JSON.parse(asset.amount_by_date);
+    });
+
+    //iterate over assetsParsed to reduce it. We take only one data per day and ignore the others
+    let assetsByDay = [];
+    assetsParsed.map((assets) => {
+      let date;
+      const assetsFiltered = assets.filter((item) => {
+        if (
+          new Date(item.date).getDate() !== new Date(date).getDate() ||
+          new Date(item.date).getMonth() !== new Date(date).getMonth()
+        ) {
+          date = item.date;
+          return true;
+        }
+        return false;
+      });
+      assetsByDay.push(assetsFiltered);
+    });
+
+    //sum of all assetsByDay where each currency in asset is add to the same currency for the same day
+    const numberOfArraysInAssetsByDay = assetsByDay.length;
+
+    for (let i = 1; i &lt; numberOfArraysInAssetsByDay; i++) {
+      //get the index if the date is the same as "assetsByDay[0]" for more treatment
+      //if not the "obj" is directly push inside "assetsByDay[0]"
+      assetsByDay[i].map((obj) => {
+        const index = assetsByDay[0].findIndex(
+          (item) => item.date.substring(0, 10) === obj.date.substring(0, 10)
+        );
+
+        //if the date of current "obj" is already present in "assetsByDay[0]"
+        //amount are added to each other by currency
+        if (index >= 0) {
+          assetsByDay[0][index].BTC =
+            Number(assetsByDay[0][index].BTC) + Number(obj.BTC);
+          assetsByDay[0][index].ETH =
+            Number(assetsByDay[0][index].ETH) + Number(obj.ETH);
+          assetsByDay[0][index].USDT =
+            Number(assetsByDay[0][index].USDT) + Number(obj.USDT);
+        } else {
+          assetsByDay[0].push(obj);
+        }
+      });
+    }
+
+    //sort the final array "assetsByDay[0]" by data
+    assetsByDay[0].sort((a, b) => {
+      return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+    });
+
+    return assetsByDay[0];
+  }
+
+  /**
+   * @description Gives user assets filter and sorted by day for one strategy
+   * @param {ctx} ctx - Context object
+   * @param {number|string} ctx.params.id - User's id
+   * @param {string} ctx.params.strat - The title of strategy
+   * @returns {Array&lt;currencyByDay>} - Array of currencyByDay
+   */
+  async byStrategy({ params }) {
+    const userId = params.id;
+    const strat = params.strat.replace("%20", " ").split("_").join("/");
+
+    const stratByDate = await Database.select("assets.amount_by_date")
+      .from("exchanges")
+      .where("user_id", userId)
+      .rightJoin("strategies", "strategies.exchange_id", "exchanges.id")
+      .rightJoin("assets", "assets.strategy_id", "strategies.id")
+      .where("strategies.title", strat);
+
+    /**
+     * TODO: handle case multi exchange
+     */
+    if (stratByDate.length > 1) return stratByDate;
+
+    return stratByDate[0].amount_by_date;
+  }
+
+  /**
+   * @description Gives all user strategies
+   * @param {ctx} ctx - Context object
+   * @param {number|string} ctx.params.id - User's id
+   * @returns {Array&lt;strategy>} - Array of strategies
+   */
+  async total({ params }) {
+    //get user's data
+    let user = await User.query()
+      .where("id", params.id)
+      .with("exchanges.strategies")
+      .fetch();
+    user = user.toJSON();
+
+    //push all strategy by exchange to "strats"
+    const strats = [];
+    user[0].exchanges.map((exchange) => {
+      exchange.strategies.map((strategy) => {
+        strats.push(strategy);
+      });
+    });
+    return strats;
+  }
+
+  /**
+   * @description Inform if the user had enough data (above 1), useful for displaying or not the graph
+   * @param {ctx} ctx - Context object
+   * @param {number|string} ctx.params.id - User's id
+   * @returns {enoughData} - Object
+   */
+  async sufficient({ params }) {
+    const userId = params.id;
+    const assets = await Database.select("amount_by_date")
+      .table("assets")
+      .rightJoin("strategies", "strategy_id", "strategies.id")
+      .rightJoin("exchanges", "exchange_id", "exchanges.id")
+      .rightJoin("users", "user_id", "users.id")
+      .where("users.id", userId);
+
+    let enoughDatas = false;
+    assets.forEach((asset) => {
+      const amounts = JSON.parse(asset.amount_by_date);
+      if (amounts &amp;&amp; amounts.length > 1) enoughDatas = true;
+    });
+
+    return { enoughDatas };
+  }
+
+  async test(pair) {
+    async function getAvgPrice(pair, limit) {
+      const datas = await axios.get(
+        `https://api.binance.com/api/v3/klines?symbol=${pair}&amp;interval=1d&amp;limit=${limit}`
+      );
+      const dataFormated = datas.data.map((data) => {
+        return {
+          day: new Date(data[6]).toISOString(),
+          avgPrice: (Number(data[1]) + Number(data[4])) / 2,
+        };
+      });
+      return dataFormated;
+    }
+
+    function convert(base, output, isBase) {
+      if (isBase) return base * output;
+      else return base / output;
+    }
+
+    const ETHPrices = await getAvgPrice("ETHBTC", 100);
+    const USDTPrices = await getAvgPrice("BTCUSDT", 100);
+
+    let data = fs.readFileSync(`${Helpers.appRoot()}/data.json`);
+    data = JSON.parse(data);
+    const snapshots = data.snapshotVos;
+
+    const formatData = snapshots.map((snap) => {
+      const ETHObj = ETHPrices.find((obj) => {
+        return (
+          obj.day.substring(0, 10) ===
+          new Date(snap.updateTime).toISOString().substring(0, 10)
+        );
+      });
+      const USDTObj = USDTPrices.find((obj) => {
+        return (
+          obj.day.substring(0, 10) ===
+          new Date(snap.updateTime).toISOString().substring(0, 10)
+        );
+      });
+
+      return {
+        date: new Date(snap.updateTime).toISOString(),
+        BTC: snap.data.totalAssetOfBtc,
+        ETH: convert(snap.data.totalAssetOfBtc, ETHObj.avgPrice, false),
+        USDT: convert(snap.data.totalAssetOfBtc, USDTObj.avgPrice, true),
+      };
+    });
+    const asset = await Asset.findOrCreate(
+      { id: 1 },
+      {
+        id: 1,
+        amount_by_date: JSON.stringify(formatData),
+      }
+    );
+    asset.strategy_id = 1;
+    asset.amount_by_date = JSON.stringify(formatData);
+    await asset.save();
+  }
+}
+
+module.exports = AssetController;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Fri Feb 12 2021 11:08:35 GMT+0100 (heure normale d’Europe centrale) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+<script src="scripts/collapse.js" defer></script>
+
+
+</body>
+</html>

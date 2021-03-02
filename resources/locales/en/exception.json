@@ -1,0 +1,3 @@
+{
+    "binanceKeyException": "Request error to binance. Check that secretKey and publicKey are correct."
+}

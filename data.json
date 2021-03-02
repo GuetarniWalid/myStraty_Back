@@ -1,0 +1,876 @@
+{
+    "code": 200,
+    "msg": "",
+    "snapshotVos": [
+        {
+            "type": "spot",
+            "updateTime": 1604793599000,
+            "data": {
+                "totalAssetOfBtc": "0.4315985",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00447328",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.40496305",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1604879999000,
+            "data": {
+                "totalAssetOfBtc": "0.43006914",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00447328",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.40496305",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1604966399000,
+            "data": {
+                "totalAssetOfBtc": "0.42504233",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.2092319",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "7.34296305",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605052799000,
+            "data": {
+                "totalAssetOfBtc": "0.42850358",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00423328",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.29100805",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605139199000,
+            "data": {
+                "totalAssetOfBtc": "0.42869153",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00423328",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.29100805",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605225599000,
+            "data": {
+                "totalAssetOfBtc": "0.41268766",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.20296322",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "7.28500805",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605311999000,
+            "data": {
+                "totalAssetOfBtc": "0.41793174",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.20296322",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "7.28500805",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605398399000,
+            "data": {
+                "totalAssetOfBtc": "0.41484188",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.40811231",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "0.14000805",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605484799000,
+            "data": {
+                "totalAssetOfBtc": "0.41478141",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.20803282",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "7.25188905",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605571199000,
+            "data": {
+                "totalAssetOfBtc": "0.41071997",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.40426271",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "0.13988905",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605657599000,
+            "data": {
+                "totalAssetOfBtc": "0.4105534",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.40426271",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "0.13988905",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605743999000,
+            "data": {
+                "totalAssetOfBtc": "0.41049573",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.40426271",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "0.13988905",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605830399000,
+            "data": {
+                "totalAssetOfBtc": "0.4104076",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.40426271",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "0.13988905",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1605916799000,
+            "data": {
+                "totalAssetOfBtc": "0.41077636",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00757174",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.68333105",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606003199000,
+            "data": {
+                "totalAssetOfBtc": "0.43633996",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00408873",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.80221205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606089599000,
+            "data": {
+                "totalAssetOfBtc": "0.45953556",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00408873",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.80221205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606175999000,
+            "data": {
+                "totalAssetOfBtc": "0.49547131",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00408873",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.80221205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606262399000,
+            "data": {
+                "totalAssetOfBtc": "0.4742944",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00408873",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.80221205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606348799000,
+            "data": {
+                "totalAssetOfBtc": "0.4545027",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.22402755",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "7.54121205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606435199000,
+            "data": {
+                "totalAssetOfBtc": "0.45500502",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.44817928",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "0.14021205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606521599000,
+            "data": {
+                "totalAssetOfBtc": "0.45500029",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.44817928",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "0.14021205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606607999000,
+            "data": {
+                "totalAssetOfBtc": "0.45671332",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00435207",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.70363405",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606694399000,
+            "data": {
+                "totalAssetOfBtc": "0.47129576",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00435207",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.70363405",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606780799000,
+            "data": {
+                "totalAssetOfBtc": "0.46529963",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00435207",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.70363405",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606867199000,
+            "data": {
+                "totalAssetOfBtc": "0.46520703",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00435207",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.70363405",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1606953599000,
+            "data": {
+                "totalAssetOfBtc": "0.4643108",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.22656671",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "7.54880205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "34.97007096",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1607039999000,
+            "data": {
+                "totalAssetOfBtc": "0.46786362",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00448148",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.59574805",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "0.04571712",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1607126399000,
+            "data": {
+                "totalAssetOfBtc": "0.45087219",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.22297546",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "7.43774805",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "0.04571712",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1607212799000,
+            "data": {
+                "totalAssetOfBtc": "0.45477196",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00441066",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.45672205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "0.04571712",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        },
+        {
+            "type": "spot",
+            "updateTime": 1607299199000,
+            "data": {
+                "totalAssetOfBtc": "0.45446242",
+                "balances": [
+                    {
+                        "asset": "BTC",
+                        "free": "0.00441066",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "ETH",
+                        "free": "14.45672205",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "USDT",
+                        "free": "0.04571712",
+                        "locked": "0"
+                    },
+                    {
+                        "asset": "XTZ",
+                        "free": "4.08110258",
+                        "locked": "0"
+                    }
+                ]
+            }
+        }
+    ]
+}
