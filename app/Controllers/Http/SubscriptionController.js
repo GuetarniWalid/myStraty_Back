@@ -177,13 +177,13 @@ class SubscriptionController {
   retrievePlan(productId) {
     let type;
     switch (productId) {
-      case "prod_InJ7mgOxHQALRF":
+      case Env.get("PRODUCT_ID_BRONZE"):
         type = "bronze";
         break;
-      case "prod_InJ7wXjzTFDZfl":
+      case Env.get("PRODUCT_ID_SILVER"):
         type = "argent";
         break;
-      case "prod_InJ8WauKXdADOn":
+      case Env.get("PRODUCT_ID_GOLD"):
         type = "or";
         break;
       default:
