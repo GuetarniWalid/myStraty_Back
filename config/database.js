@@ -80,8 +80,4 @@ const database = {
   }
 }
 
-if( Env.get('NODE_ENV') === 'production') {
-  database.mysql.connection.socketPath = Env.get('DB_SOCKET')
-}
-
 module.exports = database

@@ -61,7 +61,7 @@ class SubscriptionController {
         success_url: `${Env.get(
           "FRONT_URL"
         )}/#/console/abonnement/succes?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${Env.get("FRONT_URL")}console/abonnement`,
+        cancel_url: `${Env.get("FRONT_URL")}/#console/abonnement`,
       });
 
       return {

@@ -112,7 +112,6 @@ class ExchangeController {
     await exchange.save();
 
     response.exchange = exchange.toJSON();
-    console.log("🚀 ~ file: ExchangeController.js ~ line 125 ~ ExchangeController ~ save ~ response", response)
     return response;
   }
 }
