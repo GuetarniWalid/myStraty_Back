@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "node ace test",
-    "doc": "jsdoc -c jsdoc.json -r -d documentation",
+    "doc": "jsdoc -c jsdoc.json -r -d documentation"
   },
   "keywords": [
     "adonisjs",
