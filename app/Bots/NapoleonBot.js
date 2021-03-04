@@ -6,7 +6,7 @@ const Event = use("Event");
 
 class NapoleonBot {
   constructor(order) {
-    this.dateAlreadyChecked = true;
+    this.dateAlreadyChecked = false;
     this.errorNum = 0;
     this.interval = 60000;
     if (order === "start") this.start();
@@ -53,6 +53,7 @@ class NapoleonBot {
   async getTodayPosition() {
     try {
       const stratPosition = await this.getStratData("STRAT_BTC_ETH_USD_LO_D_1");
+      console.log(this.dateAlreadyChecked);
       if (this.dateAlreadyChecked || this.checkTodayDate(stratPosition)) {
         const position = stratPosition.data.data.current_position2;
         const currentPosition = {
@@ -67,10 +68,10 @@ class NapoleonBot {
         napoleon.position = JSON.stringify(currentPosition);
         await napoleon.save();
         Event.fire("napoleon::success");
-      } else throw new Error("Dates do not match");
+      } else throw new Error("Dates does not match");
     } catch (error) {
       console.log(error);
-      if (error.message === "Dates do not match") throw error;
+      if (error.message === "Dates does not match") throw error;
       else
         throw new Error(
           "Error at request getTodayPosition to NapoleonX.\nCheck that your username and password are correct.\nIf they are then check you have at least one token checked in NapoleonX Platform.\n" +

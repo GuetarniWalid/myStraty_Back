@@ -16,15 +16,8 @@ const Env = use("Env");
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use("Route");
 const Event = use("Event");
+const NapoleonBot = use('App/Bots/NapoleonBot')
 
-Route.get("/", () => {
-  // Event.fire("napoleon::success");
-  return {
-    NODE_ENV: process.env.NODE_ENV,
-    env: Env.get('NODE_ENV'),
-    sockec: Env.get('DB_SOCKET')
-  }
-});
 
 Route.get("test", "AssetController.test");
 Route.get("test2", async () => {
