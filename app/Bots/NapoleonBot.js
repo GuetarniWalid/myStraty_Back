@@ -53,7 +53,6 @@ class NapoleonBot {
   async getTodayPosition() {
     try {
       const stratPosition = await this.getStratData("STRAT_BTC_ETH_USD_LO_D_1");
-      console.log(this.dateAlreadyChecked);
       if (this.dateAlreadyChecked || this.checkTodayDate(stratPosition)) {
         const position = stratPosition.data.data.current_position2;
         const currentPosition = {
