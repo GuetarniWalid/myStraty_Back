@@ -16,7 +16,7 @@ class NapoleonTask extends Task {
    * @description A cron job that trigger NapoleonTask.handle() all day at 23:45
    */
   static get schedule() {
-    return "23 21 * * *";
+    return "45 23 * * *";
   }
 
   /**
