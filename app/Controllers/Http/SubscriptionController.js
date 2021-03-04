@@ -47,6 +47,7 @@ class SubscriptionController {
         customer_email: user.email,
         mode: "subscription",
         payment_method_types: ["card"],
+        preferred_locales: fr-FR,
         line_items: [
           {
             price: priceId,
