@@ -6,6 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
+    "cron": "node ace run:scheduler",
     "test": "node ace test",
     "doc": "jsdoc -c jsdoc.json -r -d documentation"
   },
