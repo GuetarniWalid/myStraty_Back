@@ -6,65 +6,69 @@ const Mail = use("Mail");
 const Env = use("Env");
 const axios = require("axios");
 const moment = require("moment");
-moment.locale('fr', {
-  months : 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'.split('_'),
-  monthsShort : 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'.split('_'),
-  monthsParseExact : true,
-  weekdays : 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'.split('_'),
-  weekdaysShort : 'dim._lun._mar._mer._jeu._ven._sam.'.split('_'),
-  weekdaysMin : 'Di_Lu_Ma_Me_Je_Ve_Sa'.split('_'),
-  weekdaysParseExact : true,
-  longDateFormat : {
-      LT : 'HH:mm',
-      LTS : 'HH:mm:ss',
-      L : 'DD/MM/YYYY',
-      LL : 'D MMMM YYYY',
-      LLL : 'D MMMM YYYY HH:mm',
-      LLLL : 'dddd D MMMM YYYY HH:mm'
+moment.locale("fr", {
+  months: "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split(
+    "_"
+  ),
+  monthsShort: "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split(
+    "_"
+  ),
+  monthsParseExact: true,
+  weekdays: "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
+  weekdaysShort: "dim._lun._mar._mer._jeu._ven._sam.".split("_"),
+  weekdaysMin: "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
+  weekdaysParseExact: true,
+  longDateFormat: {
+    LT: "HH:mm",
+    LTS: "HH:mm:ss",
+    L: "DD/MM/YYYY",
+    LL: "D MMMM YYYY",
+    LLL: "D MMMM YYYY HH:mm",
+    LLLL: "dddd D MMMM YYYY HH:mm",
   },
-  calendar : {
-      sameDay : '[Aujourd’hui à] LT',
-      nextDay : '[Demain à] LT',
-      nextWeek : 'dddd [à] LT',
-      lastDay : '[Hier à] LT',
-      lastWeek : 'dddd [dernier à] LT',
-      sameElse : 'L'
+  calendar: {
+    sameDay: "[Aujourd’hui à] LT",
+    nextDay: "[Demain à] LT",
+    nextWeek: "dddd [à] LT",
+    lastDay: "[Hier à] LT",
+    lastWeek: "dddd [dernier à] LT",
+    sameElse: "L",
   },
-  relativeTime : {
-      future : 'dans %s',
-      past : 'il y a %s',
-      s : 'quelques secondes',
-      m : 'une minute',
-      mm : '%d minutes',
-      h : 'une heure',
-      hh : '%d heures',
-      d : 'un jour',
-      dd : '%d jours',
-      M : 'un mois',
-      MM : '%d mois',
-      y : 'un an',
-      yy : '%d ans'
+  relativeTime: {
+    future: "dans %s",
+    past: "il y a %s",
+    s: "quelques secondes",
+    m: "une minute",
+    mm: "%d minutes",
+    h: "une heure",
+    hh: "%d heures",
+    d: "un jour",
+    dd: "%d jours",
+    M: "un mois",
+    MM: "%d mois",
+    y: "un an",
+    yy: "%d ans",
   },
-  dayOfMonthOrdinalParse : /\d{1,2}(er|e)/,
-  ordinal : function (number) {
-      return number + (number === 1 ? 'er' : 'e');
+  dayOfMonthOrdinalParse: /\d{1,2}(er|e)/,
+  ordinal: function (number) {
+    return number + (number === 1 ? "er" : "e");
   },
-  meridiemParse : /PD|MD/,
-  isPM : function (input) {
-      return input.charAt(0) === 'M';
+  meridiemParse: /PD|MD/,
+  isPM: function (input) {
+    return input.charAt(0) === "M";
   },
   // In case the meridiem units are not separated around 12, then implement
   // this function (look at locale/id.js for an example).
   // meridiemHour : function (hour, meridiem) {
   //     return /* 0-23 hour, given meridiem token and hour 1-12 */ ;
   // },
-  meridiem : function (hours, minutes, isLower) {
-      return hours < 12 ? 'PD' : 'MD';
+  meridiem: function (hours, minutes, isLower) {
+    return hours < 12 ? "PD" : "MD";
   },
-  week : {
-      dow : 1, // Monday is the first day of the week.
-      doy : 4  // Used to determine first week of the year.
-  }
+  week: {
+    dow: 1, // Monday is the first day of the week.
+    doy: 4, // Used to determine first week of the year.
+  },
 });
 
 /**
@@ -110,10 +114,12 @@ class MailTask extends Task {
 
         .fetch();
       users = users.toJSON();
-      users = users.filter(user => {
-        return moment(user.setting.mail_time, 'hh:mm:ss').isSame(Date.now(), 'minute')
-      })
-
+      users = users.filter((user) => {
+        return moment(user.setting.mail_time, "hh:mm:ss").isSame(
+          Date.now(),
+          "minute"
+        );
+      });
 
       if (users.length) {
         users.forEach(async (user) => {
@@ -125,18 +131,22 @@ class MailTask extends Task {
           const stratPositions = await this.getStratPositions(user.strategies);
           const trades = await this.getTrades(user.strategies);
 
-          Mail.send('daily-mail', {
-            priceProgressionFormatted,
-            currentWalletFormatted,
-            priceProgressionInPercentFormatted,
-            stratPositions,
-            trades,
-            date: moment().local('fr').format('dddd D MMMM YYYY'),
-            frontUrl: Env.get('FRONT_URL')
-          }, (message) => {
-            message.from(Env.get("MAIL_USERNAME"));
-            message.to(user.email);
-          });
+          Mail.send(
+            "daily-mail",
+            {
+              priceProgressionFormatted,
+              currentWalletFormatted,
+              priceProgressionInPercentFormatted,
+              stratPositions,
+              trades,
+              date: moment().local("fr").format("dddd D MMMM YYYY"),
+              frontUrl: Env.get("FRONT_URL"),
+            },
+            (message) => {
+              message.from(Env.get("MAIL_USERNAME"));
+              message.to(user.email);
+            }
+          );
         });
       }
     } catch (e) {
@@ -153,7 +163,7 @@ class MailTask extends Task {
     const ratesData = await axios.get(
       "https://api.binance.com/api/v3/avgPrice?symbol=EURUSDT"
     );
-    this.EurUsdtRates = ratesData.data.price
+    this.EurUsdtRates = ratesData.data.price;
 
     //calculate price progression in one day in Eur
     const lastTwoDaysAsset = await this.filterAssetsOfLastTwoDays(user);
@@ -175,10 +185,11 @@ class MailTask extends Task {
     const priceProgressionInPercentAfterDot = priceProgressionInPercentString.split(
       "."
     )[1];
-    const priceProgressionInPercentFormatted =
-      priceProgressionInPercentBeforeDot +
-      "." +
-      priceProgressionInPercentAfterDot.substring(0, 2);
+    const priceProgressionInPercentFormatted = priceProgressionInPercentAfterDot
+      ? priceProgressionInPercentBeforeDot +
+        "." +
+        priceProgressionInPercentAfterDot.substring(0, 2)
+      : priceProgressionInPercentBeforeDot;
 
     //calculate current price of wallet in Eur
     const currentWalletInEur = lastTwoDaysAsset[1].USDT / this.EurUsdtRates;
@@ -199,12 +210,12 @@ class MailTask extends Task {
     const assetSorting = new AssetSorting();
     try {
       const assetSortedByDay = await assetSorting.allDaily(user.id);
+      const lastTwoDays = assetSortedByDay.slice(-2);
+      return lastTwoDays;
+    } catch (e) {
+      console.log(e);
+      return;
     }
-    catch(e) {
-      return
-    }
-    const lastTwoDays = assetSortedByDay.slice(-2);
-    return lastTwoDays;
   }
 
   /**
@@ -231,40 +242,42 @@ class MailTask extends Task {
    */
   async getTrades(strategies) {
     const tradesPromise = strategies.map(async (strategy) => {
-      const [todayTrade] = strategy.trades.filter(trade => {
-        return moment(trade.created_at).isSame(Date.now(), 'day')
-      })
+      const [todayTrade] = strategy.trades.filter((trade) => {
+        return moment(trade.created_at).isSame(Date.now(), "day");
+      });
       //if no trade today
-      if(!todayTrade) {
+      if (!todayTrade) {
         return {
           strategyTitle: strategy.title,
-          tradeExist: false
+          tradeExist: false,
         };
       }
 
-      ''
-      const baseCurrency = todayTrade.pair.slice(0, 3)
-      const secondaryCurrency = todayTrade.pair.slice(3)
+      const baseCurrency = todayTrade.pair.slice(0, 3);
+      const secondaryCurrency = todayTrade.pair.slice(3);
 
       //get the rate of usdt/currency exchanged
-      const {data} = await axios.get(
+      const { data } = await axios.get(
         `https://api.binance.com/api/v3/avgPrice?symbol=${baseCurrency}USDT`
       );
-      const ratesData = data.price
-      const amountCurrencyExchangedInUsdt = todayTrade.amount * ratesData
-      const amountCurrencyExchangedInEur = amountCurrencyExchangedInUsdt / this.EurUsdtRates
+      const ratesData = data.price;
+      const amountCurrencyExchangedInUsdt = todayTrade.amount * ratesData;
+      const amountCurrencyExchangedInEur =
+        amountCurrencyExchangedInUsdt / this.EurUsdtRates;
 
       return {
         strategyTitle: strategy.title,
         tradeExist: true,
-        currencySell: todayTrade.action === 'BUY' ? secondaryCurrency : baseCurrency,
-        currencyBuy: todayTrade.action === 'BUY' ? baseCurrency : secondaryCurrency,
-        amount: String(amountCurrencyExchangedInEur).split('.')[0] + ' €'
+        currencySell:
+          todayTrade.action === "BUY" ? secondaryCurrency : baseCurrency,
+        currencyBuy:
+          todayTrade.action === "BUY" ? baseCurrency : secondaryCurrency,
+        amount: String(amountCurrencyExchangedInEur).split(".")[0] + " €",
       };
     });
 
-    const trades = await Promise.all(tradesPromise)
-    return trades
+    const trades = await Promise.all(tradesPromise);
+    return trades;
   }
 }
 

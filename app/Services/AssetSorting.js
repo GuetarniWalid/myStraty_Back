@@ -19,7 +19,7 @@ class AssetSorting {
     const assets = [];
     user[0].exchanges.map((exchange) => {
       exchange.strategies.map((strategy) => {
-          assets.push(strategy.asset);
+          if(strategy.asset) assets.push(strategy.asset);
       });
     });
 
