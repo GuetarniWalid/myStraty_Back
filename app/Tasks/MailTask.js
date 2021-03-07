@@ -85,7 +85,7 @@ class MailTask extends Task {
    * @description A cron job that trigger MailTask.handle() all 15 minutes
    */
   static get schedule() {
-    return "*/15 * * * *";
+    return "*/1 * * * *";
   }
 
   /**
@@ -99,18 +99,18 @@ class MailTask extends Task {
           builder.where("send_mail", true);
         })
         .whereHas("strategies", (builder) => {
-          builder.where("active", true);
+          builder.where("active", true)
         })
         .whereHas("strategies.asset")
         .with("setting")
         .with("strategies", (builder) => {
-          builder.where("active", true);
+          builder.where("active", true)
+            .with("asset")
+            .with("trades")
         })
         .with("exchanges", (builder) => {
           builder.where("name", "binance");
         })
-        .with("strategies.asset")
-        .with("strategies.trades")
 
         .fetch();
       users = users.toJSON();
@@ -130,6 +130,7 @@ class MailTask extends Task {
           } = await this.calculateAssetDataInEur(user);
           const stratPositions = await this.getStratPositions(user.strategies);
           const trades = await this.getTrades(user.strategies);
+
 
           Mail.send(
             "daily-mail",
