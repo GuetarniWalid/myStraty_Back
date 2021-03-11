@@ -247,35 +247,35 @@
  * }
  */
 
- /**
-  * @typedef {object} formattedAssetDataInEur
-  * @property {string} priceProgressionFormatted - The progression price in euro
-  * @property {string} currentWalletFormatted - The total wallet amount in euro
-  * @property {string} priceProgressionInPercentFormatted - The progression price in percent
-  */
+/**
+ * @typedef {object} formattedAssetDataInEur
+ * @property {string} priceProgressionFormatted - The progression price in euro
+ * @property {string} currentWalletFormatted - The total wallet amount in euro
+ * @property {string} priceProgressionInPercentFormatted - The progression price in percent
+ */
 
-  /**
-  * @typedef {object} assetDataShorted
-  * @property {string|number} BTC - BTC amount
-  * @property {string|number} ETH -  ETH amount
-  * @property {string|number} USDT -  USDT amount
-  * @property {string} date - Data recording date
-  */
+/**
+ * @typedef {object} assetDataShorted
+ * @property {string|number} BTC - BTC amount
+ * @property {string|number} ETH -  ETH amount
+ * @property {string|number} USDT -  USDT amount
+ * @property {string} date - Data recording date
+ */
 
-  /**
-  * @typedef {object} strategyDataShorted
-  * @property {string} title - Title of strategy
-  * @property {string} position - Position of strategy in percent
-  */
+/**
+ * @typedef {object} strategyDataShorted
+ * @property {string} title - Title of strategy
+ * @property {string} position - Position of strategy in percent
+ */
 
-  /**
-  * @typedef {object} lastTradeInfo
-  * @property {string} strategyTitle - Title of strategy that triggered this trade
-  * @property {boolean} tradeExist - If there was a trade 
-  * @property {string} currencySell - The currency sold
-  * @property {string} currencyBuy - The currency buy
-  * @property {string} amount - Amount of the exchange
-  */
+/**
+ * @typedef {object} lastTradeInfo
+ * @property {string} strategyTitle - Title of strategy that triggered this trade
+ * @property {boolean} tradeExist - If there was a trade
+ * @property {string} currencySell - The currency sold
+ * @property {string} currencyBuy - The currency buy
+ * @property {string} amount - Amount of the exchange
+ */
 
 /********** Exceptions ***********/
 

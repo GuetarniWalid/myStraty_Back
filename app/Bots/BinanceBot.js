@@ -30,6 +30,7 @@ class BinanceBot {
       this.ETH = currencies.ETH;
       this.USDT = currencies.USDT;
     }
+
     axios.defaults.headers.common["X-MBX-APIKEY"] = this.publicKey;
     //! axios.defaults.headers.common["X-MBX-APIKEY"] = this.testPublicKey;
     axios.defaults.headers.common["Content-Type"] =

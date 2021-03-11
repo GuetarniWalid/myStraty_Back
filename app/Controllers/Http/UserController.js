@@ -17,7 +17,6 @@ const moment = require("moment");
  * @classDesc This is the Controller for routes that begin by "[Domain name]/api/v1/user" or "[Domain name]/api/v1/login" . Desserve data related to user.
  */
 class UserController {
-
   /**
    * @description Gives user data
    * @param {ctx} ctx - Context object
@@ -259,18 +258,29 @@ class UserController {
     const { token } = await auth.attempt(email, password, {
       expireIn: 3600000,
     });
-    const user = await User.findBy("email", email);
-    return {
-      success: true,
-      type: "connexion",
-      token,
-      userId: user.id,
-    };
+    try {
+      const user = await User.findByOrFail({
+        email: email,
+        active: true,
+      });
+      return {
+        success: true,
+        type: "connexion",
+        token,
+        userId: user.id,
+      };
+    } catch (e) {
+      return {
+        success: false,
+        type: "connexion",
+        message: "user not active",
+      };
+    }
   }
 
   /**
    * @description Verify user's email and send a mail to update his password
-   * @param {ctx} ctx - Context object 
+   * @param {ctx} ctx - Context object
    * @param {string} ctx.request.email - User's email
    * @param {string} ctx.request.password - User's password
    * @param {boolean} ctx.request.updatePassword - Iff the  the user want update his password
@@ -377,8 +387,8 @@ class UserController {
 
   /**
    * @description Verify the token present in users email and redirect him to login page
-   * @param {ctx} ctx - Context object 
-   * @param {string} ctx.params.token - Context object 
+   * @param {ctx} ctx - Context object
+   * @param {string} ctx.params.token - Context object
    * @param {string} ctx.response.route - Function that redirect to an url
    * @returns {void}
    */
@@ -396,7 +406,7 @@ class UserController {
   }
 
   /**
-   * @description Resend a registration's email to user 
+   * @description Resend a registration's email to user
    * @param {ctx} ctx - Context oject
    * @param {string} ctx.request.email - User's email
    * @returns {success} - If everything went well

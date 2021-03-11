@@ -85,7 +85,7 @@ class MailTask extends Task {
    * @description A cron job that trigger MailTask.handle() all 15 minutes
    */
   static get schedule() {
-    return "*/1 * * * *";
+    return "*/15 * * * *";
   }
 
   /**

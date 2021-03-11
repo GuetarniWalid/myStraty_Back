@@ -7,14 +7,14 @@ const moment = require("moment");
 
 class TradingBot {
   constructor(data) {
-    this.userId = data.userId;
-    this.BTC = data.strat_btc;
-    this.ETH = data.strat_eth;
-    this.USDT = data.strat_usdt;
-    this.NapoleonPosition = data.NapoleonPosition;
-    this.strategyId = data.strategyId;
-    this.strategyPosition = data.strategyPosition;
-    this.ExchangeData = data.ExchangeData;
+    this.userId = data.userId; //number
+    this.BTC = data.strat_btc; //number
+    this.ETH = data.strat_eth; //number
+    this.USDT = data.strat_usdt; //number
+    this.NapoleonPosition = data.NapoleonPosition; //object
+    this.strategyId = data.strategyId; //number
+    this.strategyPosition = data.strategyPosition; //object
+    this.ExchangeData = data.ExchangeData; //object
     this.strategy; //model instance
     this.trade; //model instance
     this.binanceBot; //BinanceBot instance
@@ -78,7 +78,7 @@ class TradingBot {
             const orderData = await this.binanceBot.fireSpotTrade(
               currencyWin,
               currencyLoss,
-              this.calculatedPosition[currencyWin]
+              Math.abs(this.calculatedPosition[currenciesLoss]) / this.strategyPosition[currenciesLoss]
             );
             this.saveNewData(orderData);
           } catch (error) {
@@ -93,10 +93,6 @@ class TradingBot {
 
   async saveNewData(orderData) {
     //Part responsible of save each trade made in "trades" database
-    console.log(
-      "🚀 ~ file: TradingBot.js ~ line 88 ~ TradingBot ~ saveNewData ~ orderData",
-      orderData
-    );
     this.trade.pair = orderData.symbol;
     this.trade.action = orderData.side;
     this.trade.amount = orderData.executedQty;
