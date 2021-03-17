@@ -20,12 +20,12 @@ class UserController {
   /**
    * @description Gives user data
    * @param {ctx} ctx - Context object
-   * @param {ctx} ctx.params.id - User's id
+   * @param {ctx} ctx.auth.user.id - User's id
    * @returns {user} All user's data
    */
-  async get({ params }) {
+  async get({ auth }) {
     try {
-      const user = await User.find(params.id);
+      const user = await User.find(auth.user.id);
       return user;
     } catch (error) {
       console.log(error);
@@ -35,7 +35,7 @@ class UserController {
   /**
    * @description Update user data
    * @param {ctx} ctx - Context object
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @param {string} [ctx.request.email] - User's email
    * @param {string} [ctx.request.username] - User's username
    * @param {string} [ctx.request.date_of_birth] - User's date of birth
@@ -43,9 +43,9 @@ class UserController {
    * @returns {success} - If user has been updated successfully
    * @throws {formValidationFailed}
    */
-  async update({ request, params }) {
+  async update({ request, auth }) {
     const { email, username } = request.all();
-    const user = await User.find(params.id);
+    const user = await User.find(auth.user.id);
 
     //only if post is about username and email
     if (!(email === undefined) && !(username === undefined)) {
@@ -61,7 +61,6 @@ class UserController {
           email: "required|email|unique:users,email",
         };
       } else if (user.email !== email && user.username !== username) {
-        console.log(username);
         rules = {
           email: "required|email|unique:users,email",
           username: "required|unique:users,username|min:4",
@@ -185,7 +184,7 @@ class UserController {
     //the link point to 'login/inscription/validation' route
 
     //first: we create a token and save it in database
-    const { token, type } = await auth.generate(user);
+    const { token, type } = await auth.authenticator('jwt').generate(user);
     const tokenTable = new Token();
     tokenTable.type = type;
     tokenTable.token = token;
@@ -207,10 +206,6 @@ class UserController {
         message.subject("Inscription sur Trady");
       });
     } catch (error) {
-      console.log(
-        "🚀 ~ file: UserController.js ~ line 226 ~ UserController ~ inscription ~ error",
-        error
-      );
       return {
         success: false,
         details: {
@@ -254,20 +249,41 @@ class UserController {
    */
   async connexion({ request, auth }) {
     const { email, password } = request.all();
-    //expose a token that expires in 1hour
-    const { token } = await auth.attempt(email, password, {
-      expireIn: 3600000,
-    });
+
+    //if user has already an open session, we close it
     try {
-      const user = await User.findByOrFail({
+      await auth.check()
+      await auth.logout()
+    } catch(e) {
+      //nothing
+    }
+    
+    let jwtToken;
+    try {
+      const user = await auth.attempt(email, password)
+      //expose a token that expires in 1hour
+      const { token } = await auth.authenticator('jwt').generate(user, {
+        expireIn: 3600000,
+      });      
+      jwtToken = token
+    }
+    catch(e) {
+      return {
+        details: {
+          field: e.name === 'UserNotFoundException' ? 'email' : 'password'
+        }
+      }
+    }
+
+    try {
+      await User.findByOrFail({
         email: email,
         active: true,
       });
       return {
         success: true,
         type: "connexion",
-        token,
-        userId: user.id,
+        token: jwtToken,
       };
     } catch (e) {
       return {
@@ -317,7 +333,7 @@ class UserController {
       }
 
       //get user instance by token
-      const userByToken = await auth.getUser();
+      const userByToken = await auth.authenticator('jwt').getUser();
       //get user instance by mail
       let user;
       try {
@@ -344,13 +360,13 @@ class UserController {
       return { success: true };
     }
 
-    //if no password present, this is the case where the user sends his email without having been verified before
+    //if no password present, this is the case when the user sends his email without having been verified before
     //we create a mail and send to him
     try {
       const user = await User.findByOrFail("email", email);
 
       //we create a user token and save it
-      const { token, type } = await auth.generate(user);
+      const { token, type } = await auth.authenticator('jwt').generate(user);
       const tokenTable = await Token.findOrCreate(
         { user_id: user.id },
         { user_id: user.id }
@@ -362,7 +378,7 @@ class UserController {
       const text = `
                 <h3>Vous avez oublié votre mot de passe ?<h3>
                 <p>Pour le reinitialiser cliquez sur ce <a href='${Env.get(
-                  "APP_URL"
+                  "BACK_URL"
                 )}/api/v1/login/forget/validation/${token}'>lien</a>.<br>
                     Vous serez alors redirigé vers notre site</p>
             `;
@@ -425,7 +441,7 @@ class UserController {
     const text = `
                 <h3>Bienvenue sur Trady<h3>
                 <p>Pour finaliser votre inscription cliquez <a href='${Env.get(
-                  "APP_URL"
+                  "BACK_URL"
                 )}/api/v1/login/inscription/validation/${
       token.token
     }'>ici</a>.<br>
@@ -440,6 +456,12 @@ class UserController {
 
     return { success: true };
   }
+
+
+  async logout({auth}) {
+    await auth.logout()
+  }
 }
+
 
 module.exports = UserController;

@@ -26,7 +26,7 @@ module.exports = {
   | are signed and encrypted.
   |
   */
-  cookieName: 'adonis-session',
+  cookieName: 'mystraty-session',
 
   /*
   |--------------------------------------------------------------------------
@@ -37,7 +37,7 @@ module.exports = {
   | removed when browser closes.
   |
   */
-  clearWithBrowser: true,
+  clearWithBrowser: false,
 
   /*
   |--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ module.exports = {
   |  '2h', '10d', '5y', '2.5 hrs'
   |
   */
-  age: '2h',
+  age: '1h',
 
   /*
   |--------------------------------------------------------------------------
@@ -65,7 +65,8 @@ module.exports = {
   */
   cookie: {
     httpOnly: true,
-    sameSite: false,
+    sameSite: true,
+    secure: Env.get('NODE_ENV') === 'production' ? true : false,
     path: '/'
   },
 

@@ -20,24 +20,24 @@ class AssetController {
    /**
    * @description Gives all user assets filter and sorted by day
    * @param {ctx} ctx - Context object
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @returns {Array<currencyByDay>} Array of currencyByDay
    */
-  async allDaily({ params }) {
+  async allDaily({ auth }) {
     const assetSorting = new AssetSorting()
-    const assetSortedByDay = await assetSorting.allDaily(params.id)
+    const assetSortedByDay = await assetSorting.allDaily(auth.user.id)
     return assetSortedByDay
   }
 
   /**
    * @description Gives user assets filter and sorted by day for one strategy
    * @param {ctx} ctx - Context object
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @param {string} ctx.params.strat - The title of strategy
    * @returns {Array<currencyByDay>} - Array of currencyByDay
    */
-  async byStrategy({ params }) {
-    const userId = params.id;
+  async byStrategy({ auth, params }) {
+    const userId = auth.user.id;
     const strat = params.strat.replace("%20", " ").split("_").join("/");
 
     const stratByDate = await Database.select("assets.amount_by_date")
@@ -58,13 +58,13 @@ class AssetController {
   /**
    * @description Gives all user strategies
    * @param {ctx} ctx - Context object
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @returns {Array<strategy>} - Array of strategies
    */
-  async total({ params }) {
+  async total({ auth }) {
     //get user's data
     let user = await User.query()
-      .where("id", params.id)
+      .where("id", auth.user.id)
       .with("exchanges.strategies")
       .fetch();
     user = user.toJSON();
@@ -82,11 +82,11 @@ class AssetController {
   /**
    * @description Inform if the user had enough data (above 1), useful for displaying or not the graph
    * @param {ctx} ctx - Context object
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @returns {enoughData} - Object
    */
-  async sufficient({ params }) {
-    const userId = params.id;
+  async sufficient({ auth }) {
+    const userId = auth.user.id;
     const assets = await Database.select("amount_by_date")
       .table("assets")
       .rightJoin("strategies", "strategy_id", "strategies.id")

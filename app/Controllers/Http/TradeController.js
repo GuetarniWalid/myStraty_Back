@@ -10,11 +10,11 @@ class TradeController {
   /**
    * @description Gives all trade of the user
    * @param {ctx} ctx - Context object 
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @returns {Array<trade>} - An array with all trade
    */
-  async all({ params }) {
-    const userId = params.id;
+  async all({ auth }) {
+    const userId = auth.user.id;
     const trades = await Database.select("exchanges.name as exchange", "trades.pair", "trades.action", "trades.amount", "trades.created_at", "trades.id")
       .from("exchanges")
       .where("user_id", userId)

@@ -22,7 +22,7 @@ class StrategyController {
   /**
    * @description - Start a trading strategy for the user
    * @param {ctx} ctx - Context object
-   * @param {ctx} ctx.params.id - User's id
+   * @param {ctx} ctx.auth.user.id - User's id
    * @param {number} ctx.request.amount - The amount under management
    * @param {string} ctx.request.strat - The strategy selected by user
    * @param {string} ctx.request.frequency - The startegy frequency
@@ -30,9 +30,9 @@ class StrategyController {
    * @param {string} ctx.request.exchange - What exchange selected for this strategy
    * @returns {startResponse} - Array of napoleon strategy
    */
-  async start({ params, request }) {
+  async start({ auth, request }) {
     try {
-      const userId = params.id;
+      const userId = auth.user.id;
       const amount = request.input("amount");
       const strat = request.input("strat");
       const frequency = request.input("frequency");
@@ -113,12 +113,12 @@ class StrategyController {
   /**
    * @description Gives info about one user's strategy
    * @param {ctx} ctx - Content object 
-   * @param {number|string} ctx.params.id - User's id 
+   * @param {number|string} ctx.auth.user.id - User's id 
    * @param {string} ctx.params.strat - The strategy reference
    * @returns {startedStrategy} - If strategy is started and info about this startegy
    */
-  async userStrategyInfo({ params }) {
-    const userId = params.id;
+  async userStrategyInfo({ params, auth }) {
+    const userId = auth.user.id;
     const strat = params.strat;
     const exchange = await Exchange.findBy("user_id", userId);
     try {
@@ -141,11 +141,11 @@ class StrategyController {
   /**
    * @description Responds if a strategy is active
    * @param {ctx} ctx - Context object 
-   * @param {ctx} ctx.params.id - User's id
+   * @param {ctx} ctx.auth.user.id - User's id
    * @returns {isActive} - If the strategy is active
    */
-  async isActive({params}) {
-    const userId = params.id
+  async isActive({auth}) {
+    const userId = auth.user.id
     const stratActive = await User
     .query()
     .where('id', userId)

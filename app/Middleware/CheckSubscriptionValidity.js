@@ -17,8 +17,8 @@ class CheckSubscriptionValidity {
    * @return {void}
    * @throws {SubscriptionExpiryException} - if the subscription isn't valid
    */
-  async handle ({ params }, next) {
-    const userId = params.id
+  async handle ({ auth }, next) {
+    const userId = auth.user.id
     try {
       const subscription = await Subscription.findByOrFail('user_id', userId)
       //revokes the access three days after the end of the subscription

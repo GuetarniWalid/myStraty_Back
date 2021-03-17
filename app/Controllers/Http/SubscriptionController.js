@@ -18,11 +18,11 @@ class SubscriptionController {
   /**
    * @description Desserve all data about user's subscription
    * @param {ctx} ctx - Context object 
-   * @param {number|string} ctx.params.id - User's id 
+   * @param {number|string} ctx.auth.user.id - User's id 
    * @returns {subscriptionData} - All data about user's subscription
    */
-  async index({ params }) {
-    const userId = params.id;
+  async index({ auth }) {
+    const userId = auth.user.id;
     const subscription = await Subscription.findBy("user_id", userId);
     return subscription;
   }
@@ -30,14 +30,14 @@ class SubscriptionController {
   /**
    * @description create a stripe session to subscribe and redirect the user to stripe interface
    * @param {ctx} ctx - Context object
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @param {number|string} ctx.request.priceId - Price's id 
    * @returns {sessionId} - The id of stripe's session  
    * @throws {StripeCreateCheckoutSessionException} - If an error was occur
    */
-  async createCheckoutSession({ request, params }) {
+  async createCheckoutSession({ request, auth }) {
     const { priceId } = request.all();
-    const { id } = params;
+    const id = auth.user.id;
     const user = await User.find(id);
     //create a session to Stripe
     const stripe = Stripe(Env.get("STRIPE_SECRET_KEY"));
@@ -75,14 +75,14 @@ class SubscriptionController {
   /**
    * @description Open a stripe session to handle a user subscription and redirect the user to stripe interface
    * @param {ctx} ctx - Context object 
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @returns {urlToRedirect} - The URL to redirect to
    * @throws {customerPortalError} - If an error was occur
    */
-  async customerPortal({ params }) {
+  async customerPortal({ auth }) {
     //create a session to Stripe
     const stripe = Stripe(Env.get("STRIPE_SECRET_KEY"));
-    const userId = params.id;
+    const userId = auth.user.id;
 
     try {
       const subscription = await Subscription.findByOrFail("user_id", userId);

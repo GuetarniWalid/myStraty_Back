@@ -10,11 +10,11 @@ class SettingController {
     /**
      * @description Gives all settings user
      * @param {ctx} ctx - Context object 
-     * @param {number|string} ctx.params.id - User's id
+     * @param {number|string} ctx.auth.user.id - User's id
      * @returns {settings} - Settings data
      */
-    async get({params}) {
-        const userId = params.id
+    async get({auth}) {
+        const userId = auth.user.id
         const user = await User.find(userId)
         const settings = await user.setting().fetch()
         return settings
@@ -23,15 +23,15 @@ class SettingController {
     /**
      * @description - save user settings in database
      * @param {ctx} ctx - Context object 
-     * @param {number|string} ctx.params.id - User's id
+     * @param {number|string} ctx.auth.user.id - User's id
      * @param {boolean} [ctx.request.darkMode] - If darkMode must be active
      * @param {boolean} [ctx.request.sendMail] - If sendMail must be active
      * @param {string} [ctx.request.mailTime] - The time at which the email should be sent
      * @returns {object<success>}
      */
-    async post({params, request}) {
+    async post({auth, request}) {
         try {
-            const userId = params.id
+            const userId = auth.user.id
             const user = await User.find(userId)
             const settings = await user.setting().fetch()
             if(request.post().darkMode !== undefined) {

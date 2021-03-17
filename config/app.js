@@ -16,7 +16,7 @@ module.exports = {
   |
   */
 
-  name: Env.get('APP_NAME', 'AdonisJs'),
+  name: Env.get('APP_NAME', 'MyStraty'),
 
   /*
   |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@ module.exports = {
     | below value to true.
     |
     */
-    allowMethodSpoofing: true,
+    allowMethodSpoofing: false,
 
     /*
     |--------------------------------------------------------------------------
@@ -234,9 +234,11 @@ module.exports = {
   | seperate settings for cookies inside `config/session.js`.
   |
   */
+ 
   cookie: {
     httpOnly: true,
-    sameSite: false,
+    sameSite: true,
+    secure: Env.get('NODE_ENV') === 'production' ? true : false,
     path: '/',
     maxAge: 7200
   }

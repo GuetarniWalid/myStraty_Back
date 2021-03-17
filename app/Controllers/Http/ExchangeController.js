@@ -12,12 +12,12 @@ class ExchangeController {
   /**
    * @description Gives all info about one exchange of the user
    * @param {ctx} ctx - Context object
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @param {string} ctx.params.name - Name of exchange to lowercase
    * @returns {exchange} - Info about user's exchange
    */
-  async info({ params }) {
-    const userId = params.id;
+  async info({ params, auth }) {
+    const userId = auth.user.id;
     const name = params.exchange;
     const exchange = await Exchange.findByOrFail({
       user_id: userId,
@@ -29,12 +29,12 @@ class ExchangeController {
   /**
    * @description Gives the current amount in the exchange in usdt
    * @param {ctx} ctx - Context object
-   * @param {number|string} ctx.params.id - User's id
+   * @param {number|string} ctx.auth.user.id - User's id
    * @param {string} ctx.params.exchange - Exchange name in lowercase
    * @returns {number} usdt balance - The current amount of usdt in the exchange
    */
-  async USDTBalance({ params }) {
-    const userId = params.id;
+  async USDTBalance({ auth, params }) {
+    const userId = auth.user.id;
     const exchangeSelected = params.exchange;
     const exchange = await Exchange.findBy({
       user_id: userId,
@@ -75,14 +75,14 @@ class ExchangeController {
   /**
    * @description Save the exchange data in database and response if they are valid
    * @param {ctx} ctx - Context object
-   * @param {number} ctx.params.id - User's id
+   * @param {number} ctx.auth.user.id - User's id
    * @param {string} ctx.request.name - The name of exchange in lowercase
    * @param {string} ctx.request.privateKey - The private key of exchange
    * @param {string} ctx.request.publicKey - The public key of exchange
    * @returns {saveExchangeResponse} Are the exchange data validate ?
    */
-  async save({ params, request }) {
-    const userId = params.id;
+  async save({ auth, request }) {
+    const userId = auth.user.id;
     const name = request.input("name");
     const privateKey = request.input("privateKey");
     const publicKey = request.input("publicKey");

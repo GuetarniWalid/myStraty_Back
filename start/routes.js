@@ -35,49 +35,50 @@ Route.group(() => {
     "UserController.forgetValidation"
   );
   Route.post("login/resend/mail", "UserController.resendMail");
+  Route.get("login/logout", "UserController.logout");
   //
   //user
-  Route.get("user/status/:id", () => ({ loggedIn: true })).middleware([
+  Route.get("user/status", () => ({ loggedIn: true })).middleware([
     "authentication",
     "expiry",
   ]);
-  Route.get("user/:id", "UserController.get").middleware([
+  Route.get("user", "UserController.get").middleware([
     "authentication",
     "expiry",
   ]);
-  Route.post("user/update/:id", "UserController.update").middleware([
+  Route.post("user/update", "UserController.update").middleware([
     "authentication",
     "expiry",
   ]);
   //
   //settings
-  Route.get("settings/:id", "SettingController.get").middleware([
+  Route.get("settings", "SettingController.get").middleware([
     "authentication",
     "expiry",
     "subscription",
   ]);
-  Route.post("settings/:id", "SettingController.post").middleware([
+  Route.post("settings", "SettingController.post").middleware([
     "authentication",
     "expiry",
     "subscription",
   ]);
   //
   //assets
-  Route.get("assets/all/daily/:id", "AssetController.allDaily").middleware([
+  Route.get("assets/all/daily", "AssetController.allDaily").middleware([
     "authentication",
     "expiry",
     "subscription",
   ]);
   Route.get(
-    "assets/byStrategy/:strat/:id",
+    "assets/byStrategy/:strat",
     "AssetController.byStrategy"
   ).middleware(["authentication", "expiry", "subscription"]);
-  Route.get("assets/all/total/:id", "AssetController.total").middleware([
+  Route.get("assets/all/total", "AssetController.total").middleware([
     "authentication",
     "expiry",
     "subscription",
   ]);
-  Route.get("assets/sufficient/:id", "AssetController.sufficient").middleware([
+  Route.get("assets/sufficient", "AssetController.sufficient").middleware([
     "authentication",
     "expiry",
     "subscription",
@@ -92,7 +93,7 @@ Route.group(() => {
   Route.get("positions/:strategy", "PositionController.get");
   //
   //trade
-  Route.get("trade/all/:id", "TradeController.all").middleware([
+  Route.get("trade/all", "TradeController.all").middleware([
     "authentication",
     "expiry",
     "subscription",
@@ -101,32 +102,32 @@ Route.group(() => {
   //strategy
   Route.get("strategies", "StrategyController.index");
   Route.post(
-    "strategies/user/start/:id",
+    "strategies/user/start",
     "StrategyController.start"
   ).middleware(["authentication", "expiry", "subscription"]);
   Route.get(
-    "strategies/user/stop/:strategyId/:id",
+    "strategies/user/stop/:strategyId",
     "StrategyController.stop"
   ).middleware(["authentication", "expiry", "subscription"]);
   Route.get(
-    "strategies/user/active/:id",
+    "strategies/user/active",
     "StrategyController.isActive"
   ).middleware(["authentication", "expiry", "subscription"]);
   Route.get(
-    "strategies/user/:strat/:id",
+    "strategies/user/:strat",
     "StrategyController.userStrategyInfo"
   ).middleware(["authentication", "expiry", "subscription"]);
   //
   //exchange
   Route.get(
-    "exchange/info/:exchange/:id",
+    "exchange/info/:exchange",
     "ExchangeController.info"
   ).middleware(["authentication", "expiry", "subscription"]);
   Route.get(
-    "exchange/balance/usdt/:exchange/:id",
+    "exchange/balance/usdt/:exchange",
     "ExchangeController.USDTBalance"
   ).middleware(["authentication", "expiry", "subscription"]);
-  Route.post("exchange/save/:id", "ExchangeController.save").middleware([
+  Route.post("exchange/save", "ExchangeController.save").middleware([
     "authentication",
     "expiry",
     "subscription",
@@ -134,20 +135,20 @@ Route.group(() => {
   //
   //subscription
   Route.get(
-    "subscription/info/:id",
+    "subscription/info",
     "SubscriptionController.index"
   ).middleware(["authentication", "expiry"]);
   Route.post(
-    "subscription/create-checkout-session/:id",
+    "subscription/create-checkout-session",
     "SubscriptionController.createCheckoutSession"
   ).middleware(["authentication", "expiry"]);
   Route.get(
-    "subscription/customer-portal/:id",
+    "subscription/customer-portal",
     "SubscriptionController.customerPortal"
   ).middleware(["authentication", "expiry"]);
   Route.post("subscription/webhook", "SubscriptionController.webhook");
   //
   //Chat
-    Route.get("chat/all/messages/:id", "ChatController.all").middleware(["authentication", "expiry"]);
+    Route.get("chat/all/messages", "ChatController.all").middleware(["authentication", "expiry"]);
   //
 }).prefix("api/v1");
