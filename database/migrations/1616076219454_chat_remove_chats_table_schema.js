@@ -5,17 +5,12 @@ const Schema = use('Schema')
 
 class ChatRemovePseudoUniqueSchema extends Schema {
   up () {
-    this.alter('chats', (table) => {
-      table.string('pseudo', 50).notNullable().alter()
-    })
+    this.drop('chats')
   }
 
   down () {
-    this.table('chats', (table) => {
       // reverse alternations
-      table.string('pseudo', 50).notNullable().unique().alter()
-    })
-  }
+    }
 }
 
 module.exports = ChatRemovePseudoUniqueSchema
