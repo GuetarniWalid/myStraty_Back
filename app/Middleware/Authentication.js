@@ -14,9 +14,10 @@ const AuthentificationFailedException = use(
  */
 class Authentication {
   /**
-   * @description Verify the id integrity and that the user access to its own data
+   * @description Verify the session validity and that the user access to its own data
    * @param {ctx} ctx - Context object
    * @param {Function} ctx.auth.getUser - Function that return a user according to the token
+   * @param {Function} ctx.request.header - Function that return header's request
    * @param {Function} next - go to the next middleware
    * @returns {void}
    * @throws {AuthentificationFailedException} - if the authentication failed

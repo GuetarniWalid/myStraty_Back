@@ -244,7 +244,8 @@ class MailTask extends Task {
   async getTrades(strategies) {
     const tradesPromise = strategies.map(async (strategy) => {
       const [todayTrade] = strategy.trades.filter((trade) => {
-        return moment(trade.created_at).isSame(Date.now(), "day");
+        //return yesterday's trade
+        return moment(trade.created_at).isSame(moment().subtract(1, 'days'), "day");
       });
       //if no trade today
       if (!todayTrade) {
