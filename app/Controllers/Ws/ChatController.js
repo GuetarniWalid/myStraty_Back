@@ -27,6 +27,7 @@ class ChatController {
    * @returns {void}
    */
   onMessage(message) {
+    console.log("🚀 ~ file: ChatController.js ~ line 30 ~ ChatController ~ onMessage ~ message", message)
     //if text is empty, no continuation
     if(!message.message.length) return
     const formatMessage = {
