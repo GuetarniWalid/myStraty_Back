@@ -9,7 +9,7 @@ class TradeSchema extends Schema {
       table.increments()
       table.string('pair', 50).notNullable()
       table.string('action', 50).notNullable()
-      table.float('amount', 30, 15).notNullable()
+      table.decimal('amount', 14, 7).notNullable()
       table.integer('strategy_id').unsigned().references('id').inTable('strategies')
       table.timestamp('created_at').defaultTo(this.fn.now())
     })

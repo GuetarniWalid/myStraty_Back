@@ -13,7 +13,7 @@ const TradingBotListener = (exports = module.exports = {});
 //Third: start the asset recording bot for all user with active strategy
 TradingBotListener.getAllUser = async () => {
   //for user with a subscription expiry
-  TradingBot.deactivateStrategy();
+  await TradingBot.deactivateStrategy();
 
   //get Napoleon position
   let NapoleonPositions = await Napoleon.all();
@@ -41,7 +41,7 @@ TradingBotListener.getAllUser = async () => {
     for (const exchange of user.exchanges) {
       for (const strategy of exchange.strategies) {
         //start the trading bot for each strategy by user
-        new TradingBot({
+        const tradingBot = new TradingBot({
           userId: user.id,
           strat_btc: strategy.btc,
           strat_eth: strategy.eth,
@@ -55,6 +55,7 @@ TradingBotListener.getAllUser = async () => {
           strategyId: strategy.id,
           ExchangeData: exchange,
         });
+        tradingBot.startLogic()
 
         //start recording amounts for each strategy by user
         new AssetRecordingBot({

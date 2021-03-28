@@ -8,9 +8,9 @@ class StrategySchema extends Schema {
     this.create('strategies', (table) => {
       table.increments()
       table.string('title', 50).notNullable()
-      table.float('btc', 23, 8).defaultTo(0).notNullable()
-      table.float('eth', 23, 8).defaultTo(0).notNullable()
-      table.float('usdt', 23, 8).defaultTo(0).notNullable()
+      table.decimal('btc', 14, 7).defaultTo(0).notNullable()
+      table.decimal('eth', 14, 7).defaultTo(0).notNullable()
+      table.decimal('usdt', 14, 7).defaultTo(0).notNullable()
       table.string('strategy', 100)
       table.json('position').nullable()
       table.integer('exchange_id').unsigned().references('id').inTable('exchanges')

@@ -23,7 +23,7 @@ const providers = [
   '@adonisjs/mail/providers/MailProvider',
   '@adonisjs/antl/providers/AntlProvider',
   '@adonisjs/validator/providers/ValidatorProvider',
-  '@adonisjs/websocket/providers/WsProvider'
+  '@adonisjs/websocket/providers/WsProvider',
 ]
 
 /*
@@ -37,7 +37,8 @@ const providers = [
 */
 const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
-  'adonis-scheduler/providers/CommandsProvider'
+  'adonis-scheduler/providers/CommandsProvider',
+  '@adonisjs/vow/providers/VowProvider'
 ]
 
 /*

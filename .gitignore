@@ -1,12 +1,14 @@
 # Node modules
 node_modules
 package-lock.json
+.vscode
 
 # Adonis directory for storing tmp files
 tmp
 
 # Environment variables, never commit this file
 .env
+.env.testing
 
 # The development sqlite file
 database/*.sqlite

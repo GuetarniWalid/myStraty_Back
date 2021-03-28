@@ -1,17 +1,19 @@
 const User = use("App/Models/User");
 const BinanceBot = use("App/Bots/BinanceBot");
 const Strategy = use("App/Models/Strategy");
+const Big = require("big.js");
+const Env = use('Env')
 
 class Clean {
-  userId;
-  exchangeId;
-  user;
+  userId; //number
+  exchangeId; //number
+  user; //object
   strategies;
   strategiesAmount = {};
   binanceAmount = {};
   currencyWithNotEnoughLiquidity = [];
-  amountToSubstract = [];
   strategiesSorted = {};
+  amountToSubstract = [];
 
   constructor(user) {
     this.userId = user.id;
@@ -22,17 +24,25 @@ class Clean {
       this.user = await User.find(this.userId);
       await this.getActiveStrategies();
       await this.getTotalAmountOfStrategies();
-      await this.getExchangeWalletAmount();
+      try {
+        await this.getExchangeWalletAmount();
+      } catch(e) {
+        if(Env.get('NODE_ENV') === 'test') this.binanceAmount = {
+          BTC: 1.46,
+          ETH: 13,
+          USDT: 8.148456
+        }
+        else throw new Error(e.message)
+      }
       const enouhtLiquidity = this.exchangeHasEnoughLiquidity();
-  
+
       if (!enouhtLiquidity) {
         this.determineAmountToSubstract();
         await this.substractAmountByStrat();
       }
-    }
-    catch(e) {
-      console.log(e)
-      return
+    } catch (e) {
+      console.log(e);
+      return;
     }
   }
 
@@ -42,47 +52,59 @@ class Clean {
         .strategies()
         .where("active", true)
         .fetch();
-  
+
       this.strategies = strategies.toJSON();
       this.exchangeId = this.strategies[0].exchange_id;
-    }
-    catch(e) {
-      throw new Error('No strat active')
+    } catch (e) {
+      throw new Error("No strat active");
     }
   }
 
-  async getTotalAmountOfStrategies() {
-    let BTC = 0;
-    let ETH = 0;
-    let USDT = 0;
+  getTotalAmountOfStrategies() {
+    let BTC = new Big(0);
+    let ETH = new Big(0);
+    let USDT = new Big(0);
 
     this.strategies.forEach((strategy) => {
-      BTC += strategy.btc;
-      ETH += strategy.eth;
-      USDT += strategy.usdt;
+      BTC = BTC.plus(strategy.btc);
+      ETH = ETH.plus(strategy.eth);
+      USDT = USDT.plus(strategy.usdt);
     });
 
     this.strategiesAmount = {
-      BTC,
-      ETH,
-      USDT,
+      BTC: BTC.toNumber(),
+      ETH: ETH.toNumber(),
+      USDT: USDT.toNumber(),
     };
   }
 
   async getExchangeWalletAmount() {
-    let binance = await this.user.exchanges().where("name", "binance").fetch();
-    binance = binance.toJSON()[0];
+      let binance = await this.user
+        .exchanges()
+        .where("name", "binance")
+        .fetch();
+      binance = binance.toJSON()[0];
 
-    const binanceBot = new BinanceBot(binance);
-    [
-      this.binanceAmount.BTC,
-      this.binanceAmount.ETH,
-      this.binanceAmount.USDT,
-    ] = await Promise.all([
-      binanceBot.getWalletBalance("btc"),
-      binanceBot.getWalletBalance("eth"),
-      binanceBot.getWalletBalance("usdt"),
-    ]);
+      const binanceBot = new BinanceBot(binance);
+      [
+        this.binanceAmount.BTC,
+        this.binanceAmount.ETH,
+        this.binanceAmount.USDT,
+      ] = await Promise.all([
+        binanceBot.getWalletBalance("btc"),
+        binanceBot.getWalletBalance("eth"),
+        binanceBot.getWalletBalance("usdt"),
+      ]);
+
+      this.binanceAmount.BTC = Big(this.binanceAmount.BTC)
+        .round(7, 0)
+        .toNumber();
+      this.binanceAmount.ETH = Big(this.binanceAmount.ETH)
+        .round(7, 0)
+        .toNumber();
+      this.binanceAmount.USDT = Big(this.binanceAmount.USDT)
+        .round(7, 0)
+        .toNumber();
   }
 
   exchangeHasEnoughLiquidity() {
@@ -92,8 +114,9 @@ class Clean {
       if (this.strategiesAmount[currency] > this.binanceAmount[currency]) {
         this.currencyWithNotEnoughLiquidity.push({
           name: currency,
-          surplus:
-            this.strategiesAmount[currency] - this.binanceAmount[currency],
+          surplus: new Big(this.strategiesAmount[currency])
+            .minus(this.binanceAmount[currency])
+            .toNumber(),
         });
 
         enouhtLiquidity = false;
@@ -104,38 +127,49 @@ class Clean {
   }
 
   determineAmountToSubstract() {
-    this.currencyWithNotEnoughLiquidity.forEach(async (currency) => {
+    this.currencyWithNotEnoughLiquidity.forEach((currency) => {
       this.amountToSubstract.push({
         currency: currency.name,
-        size: Number(((currency.surplus / this.strategies.length) + 0.00000001).toFixed(8)),
+        size: new Big(currency.surplus)
+          .div(this.strategies.length)
+          .round(7, 3)
+          .toNumber(),
         nbStrat: this.strategies.length,
       });
     });
   }
 
   async substractAmountByStrat() {
+    //setup of "big.js"
+    Big.RM = 3; //ROUND_DOWN
+    Big.DP = 7; //number after dot
+
     this.sortStratByCurrencyGrowing();
 
     for (const amount of this.amountToSubstract) {
       for (const strategy of this.strategiesSorted[amount.currency]) {
         const strategyDB = await Strategy.find(strategy.id);
-        let remainingAmount =
-          strategy[amount.currency.toLowerCase()] - amount.size;
+        let remainingAmount = new Big(strategy[amount.currency.toLowerCase()])
+          .minus(amount.size)
+          .round(7, 3)
+          .toNumber();
         if (remainingAmount < 0) {
           amount.nbStrat -= 1;
-          amount.size += Math.abs(remainingAmount) / amount.nbStrat;
+          if (amount.nbStrat > 0)
+            amount.size += new Big(remainingAmount)
+              .abs()
+              .div(amount.nbStrat)
+              .toNumber();
 
           strategyDB[amount.currency.toLowerCase()] = 0;
         } else strategyDB[amount.currency.toLowerCase()] = remainingAmount;
-        strategyDB.save();
+        await strategyDB.save();
       }
     }
   }
 
   sortStratByCurrencyGrowing() {
-    // console.log(this.strategies)
     this.currencyWithNotEnoughLiquidity.forEach((currency) => {
-      // console.log(currency)
       this.strategies.sort((previous, next) => {
         return (
           previous[currency.name.toLowerCase()] -

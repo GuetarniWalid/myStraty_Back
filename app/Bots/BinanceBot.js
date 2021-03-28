@@ -2,11 +2,9 @@ const axios = require("axios").default;
 const crypto = require("crypto");
 const BinanceKeyException = use("App/Exceptions/BinanceKeyException");
 const Env = use('Env')
+const Big = require('big.js')
 
 class BinanceBot {
-  testPublicKey =Env.get('BINANCE_TEST_PUBLIC_KEY')
-  testPrivateKey =Env.get('BINANCE_TEST_PRIVATE_KEY')
-
   minimumTradeAmount = {
     ETHBTC: {
       ETH: 0.001,
@@ -32,7 +30,6 @@ class BinanceBot {
     }
 
     axios.defaults.headers.common["X-MBX-APIKEY"] = this.publicKey;
-    //! axios.defaults.headers.common["X-MBX-APIKEY"] = this.testPublicKey;
     axios.defaults.headers.common["Content-Type"] =
       "application/x-www-form-urlencoded";
   }
@@ -42,6 +39,7 @@ class BinanceBot {
     return baseCurrency === currencyLoss ? "quantity" : "quoteOrderQty";
   }
 
+  //return the the right side according the currency that loss in value and currency that win
   side(currencyWin, currencyLoss) {
     let side;
     if (currencyWin === "ETH") {
@@ -53,6 +51,7 @@ class BinanceBot {
     return side;
   }
 
+  //create the right pair that binance recognize from two currency
   pair(firstCurrency, secondCurrency) {
     let pair = "BTCUSDT";
     if (firstCurrency === "ETH") {
@@ -64,10 +63,12 @@ class BinanceBot {
   }
 
   formatQuantity(qty, pair, currencyLoss) {
-    const lengthMinimum = String(this.minimumTradeAmount[pair][currencyLoss])
+    const lengthMaxAfterDot = String(this.minimumTradeAmount[pair][currencyLoss])
+      .split('.')[1]
       .length;
-    const formatQty = String(qty).substring(0, lengthMinimum);
-    return Number(formatQty);
+    const qtyBeforeDot = String(qty).split('.')[0];
+    const qtyAfterDot = String(qty).split('.')[1].substring(0, lengthMaxAfterDot);
+    return Number(qtyBeforeDot.concat('.', qtyAfterDot));
   }
 
   async fireSpotTrade(currencyWin, currencyLoss, percent) {
@@ -92,18 +93,18 @@ class BinanceBot {
 
       const timestamp = Date.now();
 
-      const baseURL = `https://api.binance.com/api/v3/order`;
-      //! const baseURL = `https://testnet.binance.vision/api/v3/order`;
+      const baseURL = Env.get('NODE_ENV') === 'test' ? `https://testnet.binance.vision/api/v3/order` : `https://api.binance.com/api/v3/order`;
       const message = `symbol=${pair}&side=${side}&type=MARKET&${typeOfQuantity}=${quantityFormated}&newOrderRespType=FULL&recvWindow=10000&timestamp=${timestamp}`;
       //crypt url parameters to send to the exchange
       const hmac = crypto.createHmac('sha256', this.privateKey);
-      //! const hmac = crypto.createHmac("sha256", this.testPrivateKey);
       hmac.update(message);
       const queryURL = `${baseURL}?${message}&signature=${hmac.digest("hex")}`;
 
       const order = await axios.post(queryURL);
-      return order.data;
+     return order.data;
     } catch (error) {
+      console.log('path', error.response.request.path)
+      console.log('data', error.response.data)
       throw new Error(
         "Error at request trade to Binance.\nCheck your API authorization levels (to Binance in parameter, section security , settings, API Management and tick Enable Trading.)\n\n" +
           error
@@ -111,6 +112,7 @@ class BinanceBot {
     }
   }
 
+  //valide for only 3 currency 'BTC, ETH, USDT'
   async convert(original, toConvert) {
     //determine pair to create correct url endpoint
     const pair = this.pair(original, toConvert);
@@ -119,15 +121,15 @@ class BinanceBot {
     const unit = original === pair.substring(0, 3) ? toConvert : original;
 
     //get average price of original asset
-    const result = await axios.get(
-      `https://api.binance.com/api/v3/avgPrice?symbol=${pair}`
-    );
+    const binanceUrlEndpoint = Env.get('NODE_ENV') === 'test' ? `https://testnet.binance.vision/api/v3/avgPrice?symbol=${pair}` : `https://api.binance.com/api/v3/avgPrice?symbol=${pair}`
+    const result = await axios.get(binanceUrlEndpoint);
     const avgPrice = Number(result.data.price);
 
     if (original !== unit) {
-      return this[original] * avgPrice;
+      return new Big(this[original] * avgPrice).round(7, 1).toNumber();
     } else {
-      return this[original] / avgPrice;
+      Big.RM = 1
+      return new Big(this[original]).div(avgPrice).round(7, 1).toNumber();
     }
   }
 
@@ -140,11 +142,11 @@ class BinanceBot {
     const queryURL = `${baseURL}?${message}&signature=${hmac.digest("hex")}`;
 
     try {
-      let balance = await axios.get(queryURL);
-      const [balanceUSDT] = balance.data.filter(
+      const response = await axios.get(queryURL);
+      const [currencyData] = response.data.filter(
         (obj) => obj.coin === currency.toUpperCase()
       );
-      return balanceUSDT.free;
+      return currencyData.free;
     } catch (error) {
       throw new BinanceKeyException();
     }
@@ -152,7 +154,7 @@ class BinanceBot {
 
   async test() {
     const timestamp = Date.now();
-    const baseURL = `https://api.binance.com/api/v3/order/test`;
+    const baseURL = Env.get('NODE_ENV') === 'test' ? 'https://testnet.binance.vision/api/v3/order/test' : `https://api.binance.com/api/v3/order/test`;
     const message = `symbol=BTCUSDT&side=SELL&type=MARKET&quantity=0.01&newClientOrderId=my_order_id_1&timestamp=${timestamp}`;
     const hmac = crypto.createHmac("sha256", this.privateKey);
     hmac.update(message);
