@@ -38,7 +38,7 @@ const providers = [
 const aceProviders = [
   '@adonisjs/lucid/providers/MigrationsProvider',
   'adonis-scheduler/providers/CommandsProvider',
-  '@adonisjs/vow/providers/VowProvider'
+  '@adonisjs/vow/providers/VowProvider',
 ]
 
 /*
@@ -63,6 +63,8 @@ const aliases = {}
 | Here you store ace commands for your package
 |
 */
-const commands = []
+const commands = [
+  'App/Commands/Fill'
+]
 
 module.exports = { providers, aceProviders, aliases, commands }

@@ -1,11 +1,7 @@
 "use strict";
 const User = use("App/Models/User");
-const Asset = use("App/Models/Asset");
 const Database = use("Database");
-const Helpers = use("Helpers");
 const AssetSorting = use("App/Services/AssetSorting")
-const axios = require("axios").default;
-const fs = require("fs");
 
 /**
  * @namespace Controllers.Http
@@ -101,65 +97,6 @@ class AssetController {
     });
 
     return { enoughDatas };
-  }
-
-  async test(pair) {
-    async function getAvgPrice(pair, limit) {
-      const datas = await axios.get(
-        `https://api.binance.com/api/v3/klines?symbol=${pair}&interval=1d&limit=${limit}`
-      );
-      const dataFormated = datas.data.map((data) => {
-        return {
-          day: new Date(data[6]).toISOString(),
-          avgPrice: (Number(data[1]) + Number(data[4])) / 2,
-        };
-      });
-      return dataFormated;
-    }
-
-    function convert(base, output, isBase) {
-      if (isBase) return base * output;
-      else return base / output;
-    }
-
-    const ETHPrices = await getAvgPrice("ETHBTC", 100);
-    const USDTPrices = await getAvgPrice("BTCUSDT", 100);
-
-    let data = fs.readFileSync(`${Helpers.appRoot()}/data.json`);
-    data = JSON.parse(data);
-    const snapshots = data.snapshotVos;
-
-    const formatData = snapshots.map((snap) => {
-      const ETHObj = ETHPrices.find((obj) => {
-        return (
-          obj.day.substring(0, 10) ===
-          new Date(snap.updateTime).toISOString().substring(0, 10)
-        );
-      });
-      const USDTObj = USDTPrices.find((obj) => {
-        return (
-          obj.day.substring(0, 10) ===
-          new Date(snap.updateTime).toISOString().substring(0, 10)
-        );
-      });
-
-      return {
-        date: new Date(snap.updateTime).toISOString(),
-        BTC: snap.data.totalAssetOfBtc,
-        ETH: convert(snap.data.totalAssetOfBtc, ETHObj.avgPrice, false),
-        USDT: convert(snap.data.totalAssetOfBtc, USDTObj.avgPrice, true),
-      };
-    });
-    const asset = await Asset.findOrCreate(
-      { id: 1 },
-      {
-        id: 1,
-        amount_by_date: JSON.stringify(formatData),
-      }
-    );
-    asset.strategy_id = 1;
-    asset.amount_by_date = JSON.stringify(formatData);
-    await asset.save();
   }
 }
 
