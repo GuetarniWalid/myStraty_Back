@@ -1,5 +1,4 @@
 "use strict";
-const Env = use("Env");
 /*
 |--------------------------------------------------------------------------
 | Routes
@@ -15,14 +14,8 @@ const Env = use("Env");
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use("Route");
-const Event = use("Event");
-const NapoleonBot = use('App/Bots/NapoleonBot')
 
-
-Route.get("test", "AssetController.test");
-Route.get("test2", async () => {
-  Event.fire("tradingBot::start");
-});
+Route.get("/", () => console.log('iciiiii!!!'));
 
 Route.group(() => {
   //Login
@@ -108,7 +101,7 @@ Route.group(() => {
   Route.get(
     "strategies/user/stop/:strategyId",
     "StrategyController.stop"
-  ).middleware(["authentication", "expiry", "subscription"]);
+  )/*.middleware(["authentication", "expiry", "subscription"]);*/
   Route.get(
     "strategies/user/active",
     "StrategyController.isActive"

@@ -43,15 +43,11 @@ TradingBotListener.getAllUser = async () => {
         //start the trading bot for each strategy by user
         const tradingBot = new TradingBot({
           userId: user.id,
-          strat_btc: strategy.btc,
-          strat_eth: strategy.eth,
-          strat_usdt: strategy.usdt,
-          NapoleonPosition: JSON.parse(
+          newPositions: JSON.parse(
             NapoleonPositions.find(
               (napoleon) => napoleon.strategy === strategy.strategy
             ).position
           ),
-          strategyPosition: JSON.parse(strategy.position),
           strategyId: strategy.id,
           ExchangeData: exchange,
         });

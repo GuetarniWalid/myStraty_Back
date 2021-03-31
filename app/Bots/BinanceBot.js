@@ -72,6 +72,7 @@ class BinanceBot {
   }
 
   async fireSpotTrade(currencyWin, currencyLoss, percent) {
+    console.log(currencyWin, currencyLoss, percent);
     try {
       //format all data to create correct url endpoint
       const side = this.side(currencyWin, currencyLoss);

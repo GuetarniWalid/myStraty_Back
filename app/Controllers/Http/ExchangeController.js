@@ -93,7 +93,14 @@ class ExchangeController {
       { user_Id: userId, name: name }
     );
     exchange.tested = true;
-    let response = { success: false };
+    let response = { 
+      success: false,
+      details: {
+        type: 'exchange',
+        message: 'incorrect keys'
+      }
+
+     };
 
     //only if public and private keys aren't empty
     if (privateKey && publicKey) {

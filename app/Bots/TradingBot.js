@@ -4,20 +4,21 @@ const BinanceBot = use("App/Bots/BinanceBot");
 const Subscription = use("App/Models/Subscription");
 const User = use("App/Models/User");
 const moment = require("moment");
-const Big = require("big.js")
+const Big = require("big.js");
+const Env = use("Env");
 
 class TradingBot {
   constructor(data) {
     this.userId = data.userId; //number
-    this.BTC = data.strat_btc; //number
-    this.ETH = data.strat_eth; //number
-    this.USDT = data.strat_usdt; //number
-    this.NapoleonPosition = data.NapoleonPosition; //object
+    this.newPositions = data.newPositions; //object
     this.strategyId = data.strategyId; //number
-    this.strategyPosition = data.strategyPosition; //object
     this.ExchangeData = data.ExchangeData; //object
     this.strategy; //model instance
     this.binanceBot; //BinanceBot instance
+    this.strategyPosition; //object
+    this.BTC; //number
+    this.ETH; //number
+    this.USDT; //number
   }
 
   async startLogic() {
@@ -30,15 +31,20 @@ class TradingBot {
     const allOrder = await this.tradingOrderForLongOnly();
 
     //save data relating to trades and strategies
-    for(const order of allOrder) {
-      await this.saveNewData(order)
+    for (const order of allOrder) {
+      await this.saveNewData(order);
     }
-    
   }
 
   async instantUsefulClass() {
     //instanciate useful models or classes
     this.strategy = await Strategy.find(this.strategyId);
+    this.BTC = this.strategy.btc;
+    this.ETH = this.strategy.eth;
+    this.USDT = this.strategy.usdt;
+    if (Env.get("NODE_ENV") !== "test" || !this.strategyPosition)
+      this.strategyPosition = JSON.parse(this.strategy.position);
+
     this.binanceBot = new BinanceBot(this.ExchangeData, {
       BTC: this.BTC,
       ETH: this.ETH,
@@ -48,9 +54,9 @@ class TradingBot {
 
   compareNewPositionWithOldPosition() {
     const calculatedPosition = {
-      BTC: this.NapoleonPosition.BTC - this.strategyPosition.BTC,
-      ETH: this.NapoleonPosition.ETH - this.strategyPosition.ETH,
-      USDT: this.NapoleonPosition.USDT - this.strategyPosition.USDT,
+      BTC: this.newPositions.BTC - this.strategyPosition.BTC,
+      ETH: this.newPositions.ETH - this.strategyPosition.ETH,
+      USDT: this.newPositions.USDT - this.strategyPosition.USDT,
     };
     this.calculatedPosition = calculatedPosition;
   }
@@ -119,7 +125,7 @@ class TradingBot {
 
   async saveNewData(orderData) {
     //Part responsible of save each trade made in "trades" database
-    const trade = new Trade()
+    const trade = new Trade();
     trade.pair = orderData.symbol;
     trade.action = orderData.side;
     trade.amount = orderData.executedQty;
@@ -134,23 +140,29 @@ class TradingBot {
     const side = orderData.side;
 
     this.strategy.updated_at = Date.now();
-    this.strategy.position = JSON.stringify(this.NapoleonPosition);
+    this.strategy.position = JSON.stringify(this.newPositions);
 
     //add or remove currency from original amount depending on the buying side and base currency
     let baseCurrencyAmount;
     let secondCurrencyAmount;
     if (side === "BUY") {
-      baseCurrencyAmount = new Big(this[basePartOfPair]).plus(Number(orderData.executedQty)).toNumber();
-      secondCurrencyAmount =
-        new Big(this[secondPartOfPair]).minus(Number(orderData.cummulativeQuoteQty)).toNumber();
+      baseCurrencyAmount = new Big(this[basePartOfPair])
+        .plus(Number(orderData.executedQty))
+        .toNumber();
+      secondCurrencyAmount = new Big(this[secondPartOfPair])
+        .minus(Number(orderData.cummulativeQuoteQty))
+        .toNumber();
     }
     if (side === "SELL") {
-      baseCurrencyAmount = new Big(this[basePartOfPair]).minus(Number(orderData.executedQty)).toNumber();
-      secondCurrencyAmount =
-      new Big(this[secondPartOfPair]).plus(Number(orderData.cummulativeQuoteQty)).toNumber();
+      baseCurrencyAmount = new Big(this[basePartOfPair])
+        .minus(Number(orderData.executedQty))
+        .toNumber();
+      secondCurrencyAmount = new Big(this[secondPartOfPair])
+        .plus(Number(orderData.cummulativeQuoteQty))
+        .toNumber();
     }
 
-    this. strategy[basePartOfPair] = this.formatNumber(baseCurrencyAmount);
+    this.strategy[basePartOfPair] = this.formatNumber(baseCurrencyAmount);
     this.strategy[secondPartOfPair] = this.formatNumber(secondCurrencyAmount);
 
     await this.strategy.save();
@@ -169,22 +181,48 @@ class TradingBot {
     let subscriptions = await Subscription.all();
     subscriptions = subscriptions.toJSON();
     const subscriptionsExpiry = subscriptions.filter((subscription) => {
-      return moment().add(4, "days").isAfter(
-        moment(subscription.date_end_subscription),
-        "day"
-      );
+      return moment()
+        .add(4, "days")
+        .isAfter(moment(subscription.date_end_subscription), "day");
     });
 
-    await Promise.all(subscriptionsExpiry.map(async (subscription) => {
-      const user = await User.find(subscription.user_id);
-      await user.strategies().update({
-        active: false,
-        btc: 0,
-        eth: 0,
-        usdt: 0,
-        position: JSON.stringify({ BTC: 0, ETH: 0, USDT: 1 }),
-      });
-    }));
+    await Promise.all(
+      subscriptionsExpiry.map(async (subscription) => {
+        const user = await User.find(subscription.user_id);
+        let exchanges = await user
+          .exchanges()
+          .where("validate", true)
+          .with("strategies", (builder) => {
+            builder.where("active", true);
+          })
+          .fetch();
+
+        exchanges = exchanges.toJSON();
+
+        await Promise.all(
+          exchanges.map(async (exchange) => {
+            const userParsed = user.toJSON()
+            for (const strategy of exchange.strategies) {
+              const tradingBot = new TradingBot({
+                userId: userParsed.id,
+                newPositions: { BTC: 0, ETH: 0, USDT: 1 },
+                strategyId: strategy.id,
+                ExchangeData: exchange,
+              });
+              await tradingBot.startLogic()
+            }
+          })
+        );
+
+        await user.strategies().update({
+          active: false,
+          btc: 0,
+          eth: 0,
+          usdt: 0,
+          position: JSON.stringify({ BTC: 0, ETH: 0, USDT: 1 }),
+        });
+      })
+    );
   }
 }
 

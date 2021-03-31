@@ -26,7 +26,7 @@ Factory.blueprint("App/Models/User", (faker) => {
   };
 });
 
-Factory.blueprint("App/Models/Exchange", (faker, i, {user}) => {
+Factory.blueprint("App/Models/Exchange", (faker, i, user) => {
   return {
     name: "binance",
     private_key:

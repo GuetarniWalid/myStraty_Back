@@ -74,6 +74,17 @@ class Exchange extends Model {
   assets() {
     return this.manyThrough("App/Models/Strategy", "asset");
   }
+
+
+  /**
+   * A relationship between exchanges and users table.
+   * Several exchanges can belong to one user.
+   *
+   * @return {Object} One or many ORM object that represent trades table
+   */
+   user() {
+    return this.belongsTo("App/Models/User");
+  }
 }
 
 module.exports = Exchange;
