@@ -15,8 +15,6 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use("Route");
 
-Route.get("/", () => console.log('iciiiii!!!'));
-
 Route.group(() => {
   //Login
   Route.post("login/inscription", "UserController.inscription");

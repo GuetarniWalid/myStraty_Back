@@ -8,7 +8,6 @@ const Database = use("Database");
  * @classDesc This is the Controller for routes that begin by "[Domain name]/api/v1/exchange". Desserve data related to exchanges.
  */
 class ExchangeController {
-
   /**
    * @description Gives all info about one exchange of the user
    * @param {ctx} ctx - Context object
@@ -34,43 +33,48 @@ class ExchangeController {
    * @returns {number} usdt balance - The current amount of usdt in the exchange
    */
   async USDTBalance({ auth, params }) {
-    const userId = auth.user.id;
-    const exchangeSelected = params.exchange;
-    const exchange = await Exchange.findBy({
-      user_id: userId,
-      name: exchangeSelected,
-    });
-    const dataExchange = {
-      public_key: exchange.public_key,
-      private_key: exchange.private_key,
-    };
-    /**
-     *
-     * TODO: handle Kraken exchange
-     *
-     */
-    //First: we determine the balance of exchange's wallet
-    let balanceInExchange;
-    if (exchangeSelected === "binance") {
-      const binance = new Binance(dataExchange);
-      try {
-        balanceInExchange = await binance.getWalletBalance("USDT");
-      } catch (error) {
-        balanceInExchange = 0;
+    try {
+      const userId = auth.user.id;
+      const exchangeSelected = params.exchange;
+      const exchange = await Exchange.findBy({
+        user_id: userId,
+        name: exchangeSelected,
+      });
+    
+
+      const dataExchange = {
+        public_key: exchange.public_key,
+        private_key: exchange.private_key,
+      };
+      /**
+       *
+       * TODO: handle Kraken exchange
+       *
+       */
+      //First: we determine the balance of exchange's wallet
+      let balanceInExchange;
+      if (exchangeSelected === "binance") {
+        const binance = new Binance(dataExchange);
+        try {
+         //if there is an error, binance balance equal 0
+         balanceInExchange = await binance.getWalletBalance("USDT");
+
+        } catch (error) {
+          balanceInExchange = 0;
+        }
       }
+
+      //Second: we determine the usdt balance of all strategy and for Binance
+      let strategies = await exchange.strategies().fetch()
+      strategies = strategies.toJSON()
+      const balanceOfStrategies = strategies.reduce((acc, strategy) => acc.usdt + strategy.usdt)
+
+      //Third: we substract "balanceOfStrategies" from "balanceInExchange" and return the result
+      return balanceInExchange - balanceOfStrategies;
+    } catch (e) {
+      console.log(e);
     }
-
-    //Second: we determine the usdt balance of all strategy
-    let [balanceOfStrategies] = await Database.from("strategies").sum(
-      "usdt as total"
-    );
-    balanceOfStrategies = balanceOfStrategies.total;
-
-    //Third: we substract "balanceOfStrategies" from "balanceInExchange" and return the result
-    return balanceInExchange - balanceOfStrategies;
   }
-
-
 
   /**
    * @description Save the exchange data in database and response if they are valid
@@ -93,14 +97,13 @@ class ExchangeController {
       { user_Id: userId, name: name }
     );
     exchange.tested = true;
-    let response = { 
+    let response = {
       success: false,
       details: {
-        type: 'exchange',
-        message: 'incorrect keys'
-      }
-
-     };
+        type: "exchange",
+        message: "incorrect keys",
+      },
+    };
 
     //only if public and private keys aren't empty
     if (privateKey && publicKey) {
