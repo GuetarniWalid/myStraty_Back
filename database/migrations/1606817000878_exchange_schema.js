@@ -12,7 +12,8 @@ class BinanceSchema extends Schema {
       table.string('private_key', 255)
       table.boolean('tested').defaultTo(false).notNullable()
       table.boolean('validate').defaultTo(false).notNullable()
-      table.integer('user_id').unsigned().references('id').inTable('users')
+      if(process.env.NODE_ENV === 'test') table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+      else table.integer('user_id').unsigned().references('id').inTable('users')
     })
   }
 

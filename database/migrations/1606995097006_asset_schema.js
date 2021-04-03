@@ -7,7 +7,8 @@ class AssetSchema extends Schema {
   up () {
     this.create('assets', (table) => {
       table.increments()
-      table.integer('strategy_id').unsigned().references('id').inTable('strategies')
+      if(process.env.NODE_ENV === 'test') table.integer('strategy_id').unsigned().references('id').inTable('strategies').onDelete('CASCADE')
+      else table.integer('strategy_id').unsigned().references('id').inTable('strategies')
       table.json('amount_by_date').notNullable()
     })
   }

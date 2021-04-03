@@ -10,7 +10,8 @@ class TradeSchema extends Schema {
       table.string('pair', 50).notNullable()
       table.string('action', 50).notNullable()
       table.decimal('amount', 14, 7).notNullable()
-      table.integer('strategy_id').unsigned().references('id').inTable('strategies')
+      if(process.env.NODE_ENV === 'test') table.integer('strategy_id').unsigned().references('id').inTable('strategies').onDelete('CASCADE')
+      else table.integer('strategy_id').unsigned().references('id').inTable('strategies')
       table.timestamp('created_at').defaultTo(this.fn.now())
     })
   }

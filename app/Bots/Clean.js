@@ -56,6 +56,7 @@ class Clean {
       this.strategies = strategies.toJSON();
       this.exchangeId = this.strategies[0].exchange_id;
     } catch (e) {
+      console.log(e);
       throw new Error("No strat active");
     }
   }

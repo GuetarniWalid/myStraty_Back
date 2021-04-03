@@ -53,22 +53,7 @@ Factory.blueprint("App/Models/Strategy", (faker, i, {exchange, active, btc, eth,
   };
 });
 
-Factory.blueprint("App/Models/Subscription", (faker, i, {user}) => {
-  let date_end_subscription;
-  if (user.id === 1) date_end_subscription = moment().subtract(3, "days").format("YYYY-MM-DD");
-  if (user.id === 2)
-    date_end_subscription = moment().format("YYYY-MM-DD");
-  if (user.id === 3)
-    date_end_subscription = moment()
-      .add(3, "days")
-      .format("YYYY-MM-DD");
-  if (user.id === 4)
-    date_end_subscription = moment()
-      .add(4, "days")
-      .format("YYYY-MM-DD");
-  if (user.id === 5)
-    date_end_subscription = moment().add(1, "months").format("YYYY-MM-DD");
-
+Factory.blueprint("App/Models/Subscription", (faker, i, {user, date_end_subscription}) => {
   return {
     user_id: user.id,
     tester: 1,

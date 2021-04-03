@@ -9,7 +9,8 @@ class SettingsSchema extends Schema {
       table.increments()
       table.boolean('send_mail').defaultTo(1)
       table.time('mail_time').nullable().defaultTo('09:00:00')
-      table.integer('user_id').unsigned().references('id').inTable('users')
+      if(process.env.NODE_ENV === 'test') table.integer('user_id').unsigned().references('id').inTable('users').onDelete('CASCADE')
+      else table.integer('user_id').unsigned().references('id').inTable('users')
     })
   }
 

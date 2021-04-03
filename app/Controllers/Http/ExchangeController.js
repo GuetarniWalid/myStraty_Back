@@ -64,7 +64,7 @@ class ExchangeController {
         }
       }
 
-      //Second: we determine the usdt balance of all strategy and for Binance
+      //Second: we determine the usdt balance of all strategy in Binance
       let strategies = await exchange.strategies().fetch()
       strategies = strategies.toJSON()
       const balanceOfStrategies = strategies.reduce((acc, strategy) => acc.usdt + strategy.usdt)

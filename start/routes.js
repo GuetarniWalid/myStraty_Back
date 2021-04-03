@@ -99,7 +99,7 @@ Route.group(() => {
   Route.get(
     "strategies/user/stop/:strategyId",
     "StrategyController.stop"
-  )/*.middleware(["authentication", "expiry", "subscription"]);*/
+  ).middleware(["authentication", "expiry", "subscription"]);
   Route.get(
     "strategies/user/active",
     "StrategyController.isActive"
