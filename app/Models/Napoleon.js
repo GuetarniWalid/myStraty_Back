@@ -9,6 +9,10 @@ const Model = use("Model");
  * @classDesc This is the Model of napoleons table
  */
 
-class Napoleon extends Model {}
+class Napoleon extends Model {
+    static get createdAtColumn () {
+        return null
+      }
+}
 
 module.exports = Napoleon;

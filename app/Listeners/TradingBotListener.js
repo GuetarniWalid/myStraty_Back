@@ -33,35 +33,38 @@ TradingBotListener.getAllUser = async () => {
   users = users.toJSON();
 
   //need to execute synchronously
-  users.forEach(async (user) => {
-    //a first clean of strategies active that have not enough liquidity in exchange
-    const clean = new Clean(user);
-    await clean.start();
+  await Promise.all(
+    users.map(async (user) => {
+      //a first clean of strategies active that have not enough liquidity in exchange
+        const clean = new Clean(user);
+        await clean.start();
 
-    for (const exchange of user.exchanges) {
-      for (const strategy of exchange.strategies) {
-        //start the trading bot for each strategy by user
-        const tradingBot = new TradingBot({
-          userId: user.id,
-          newPositions: JSON.parse(
-            NapoleonPositions.find(
-              (napoleon) => napoleon.strategy === strategy.strategy
-            ).position
-          ),
-          strategyId: strategy.id,
-          ExchangeData: exchange,
-        });
-        tradingBot.startLogic()
 
-        //start recording amounts for each strategy by user
-        new AssetRecordingBot({
-          strategyId: strategy.id,
-          BTC: strategy.btc,
-          ETH: strategy.eth,
-          USDT: strategy.usdt,
-          ExchangeData: exchange,
-        });
+      for (const exchange of user.exchanges) {
+        for (const strategy of exchange.strategies) {
+          //start the trading bot for each strategy by user
+          const tradingBot = new TradingBot({
+            userId: user.id,
+            newPositions: JSON.parse(
+              NapoleonPositions.find(
+                (napoleon) => napoleon.strategy === strategy.strategy
+              ).position
+            ),
+            strategyId: strategy.id,
+            ExchangeData: exchange,
+          });
+          await tradingBot.startLogic();
+
+          //start recording amounts for each strategy by user
+          new AssetRecordingBot({
+            strategyId: strategy.id,
+            BTC: strategy.btc,
+            ETH: strategy.eth,
+            USDT: strategy.usdt,
+            ExchangeData: exchange,
+          });
+        }
       }
-    }
-  });
+    })
+  );
 };

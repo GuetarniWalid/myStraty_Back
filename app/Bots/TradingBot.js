@@ -31,9 +31,12 @@ class TradingBot {
     const allOrder = await this.tradingOrderForLongOnly();
 
     //save data relating to trades and strategies
-    for (const order of allOrder) {
-      await this.saveNewData(order);
+    if (allOrder) {
+      for (const order of allOrder) {
+        await this.saveNewData(order);
+      }
     }
+
   }
 
   async instantUsefulClass() {
@@ -201,7 +204,7 @@ class TradingBot {
 
         await Promise.all(
           exchanges.map(async (exchange) => {
-            const userParsed = user.toJSON()
+            const userParsed = user.toJSON();
             for (const strategy of exchange.strategies) {
               const tradingBot = new TradingBot({
                 userId: userParsed.id,
@@ -209,7 +212,7 @@ class TradingBot {
                 strategyId: strategy.id,
                 ExchangeData: exchange,
               });
-              await tradingBot.startLogic()
+              await tradingBot.startLogic();
             }
           })
         );
