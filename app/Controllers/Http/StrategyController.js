@@ -55,12 +55,7 @@ class StrategyController {
 
       strategy.btc = 0;
       strategy.eth = 0;
-      strategy.usdt = amount;
-      strategy.position = JSON.stringify({
-        BTC: 0,
-        ETH: 0,
-        USDT: 1,
-      });
+      strategy.usdt = amount;      
       strategy.title = strat;
       strategy.exchange_id = exchange.id;
       strategy.frequency = frequency;
