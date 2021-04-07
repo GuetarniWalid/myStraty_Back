@@ -8,8 +8,6 @@ class AssetRecordingBot {
     this.ETH = data.ETH;
     this.USDT = data.USDT;
     this.ExchangeData = data.ExchangeData;
-
-    this.startLogic();
   }
 
   async startLogic() {

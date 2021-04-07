@@ -4,7 +4,6 @@ const TradingBot = use("App/Bots/TradingBot");
 const Trade = use("App/Models/Trade");
 const Exchange = use("App/Models/Exchange");
 const Strategy = use("App/Models/Strategy");
-const Subscription = use("App/Models/Subscription");
 const User = use("App/Models/User");
 const { test, before, beforeEach, afterEach, after } = use("Test/Suite")(
   "TradingBot"

@@ -34,7 +34,9 @@ class Authentication {
 
       //if "user.id" and "token.payload.uid" are different an error 401 is send
       if (user.id !== token.payload.uid) throw new AuthentificationFailedException();
+
     } catch (e) {
+      console.log(e);
       throw new AuthentificationFailedException();
     }
     //if ok next middleware

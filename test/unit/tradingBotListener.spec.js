@@ -11,25 +11,25 @@ const { test, before } = use("Test/Suite")("TradingBotListener");
 before(async () => {
   const users = await Factory.model("App/Models/User").createMany(5);
   await Promise.all(
-    users.map(async (user) => {
+    users.map(async (user, i) => {
       const userFormat = user.toJSON();
       let date_end_subscription;
-      switch (userFormat.id) {
-        case 1:
+      switch (i) {
+        case 0:
           date_end_subscription = moment()
             .subtract(3, "days")
             .format("YYYY-MM-DD");
           break;
-        case 2:
+        case 1:
           date_end_subscription = moment().format("YYYY-MM-DD");
           break;
-        case 3:
+        case 2:
           date_end_subscription = moment().add(3, "days").format("YYYY-MM-DD");
           break;
-        case 4:
+        case 3:
           date_end_subscription = moment().add(4, "days").format("YYYY-MM-DD");
           break;
-        case 5:
+        case 4:
           date_end_subscription = moment()
             .add(1, "months")
             .format("YYYY-MM-DD");
