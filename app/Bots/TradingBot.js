@@ -173,9 +173,7 @@ class TradingBot {
 
   //trunc number if length after dot exceed 15
   formatNumber(number) {
-    const splitedNumber = String(number).split(".");
-    splitedNumber[1] = splitedNumber[1].substring(0, 7);
-    return Number(splitedNumber.join("."));
+    return Big(number).round(7, 0).toNumber();
   }
 
   static async deactivateStrategy() {

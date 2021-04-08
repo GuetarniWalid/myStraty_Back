@@ -66,9 +66,7 @@ class BinanceBot {
     const lengthMaxAfterDot = String(this.minimumTradeAmount[pair][currencyLoss])
       .split('.')[1]
       .length;
-    const qtyBeforeDot = String(qty).split('.')[0];
-    const qtyAfterDot = String(qty).split('.')[1].substring(0, lengthMaxAfterDot);
-    return Number(qtyBeforeDot.concat('.', qtyAfterDot));
+    return Big(qty).round(lengthMaxAfterDot, 0).toNumber();
   }
 
   async fireSpotTrade(currencyWin, currencyLoss, percent) {

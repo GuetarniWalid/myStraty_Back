@@ -5,10 +5,9 @@ const Trade = use("App/Models/Trade");
 const Exchange = use("App/Models/Exchange");
 const Strategy = use("App/Models/Strategy");
 const User = use("App/Models/User");
-const { test, before, beforeEach, afterEach, after } = use("Test/Suite")(
-  "TradingBot"
-);
 const moment = require('moment')
+
+const { test, before, beforeEach, afterEach, after } = use("Test/Suite")("TradingBot");
 
 let user;
 let exchange;
@@ -34,7 +33,6 @@ beforeEach(async () => {
 
 afterEach(async () => {
   //reset database
-  await Trade.truncate();
   const strategy = await Strategy.find(data.strategyId);
   if (strategy) await strategy.delete();
 });

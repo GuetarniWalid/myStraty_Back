@@ -93,8 +93,8 @@ test("format the order quantity", async ({ assert }) => {
     [longNumber, "ETHBTC", "ETH", 17.165],
     [longNumber, "ETHUSDT", "USDT", 17.16],
     [longNumber, "ETHUSDT", "ETH", 17.16545],
-    [longNumber, "BTCUSDT", "USDT", 17.16],
-    [longNumber, "BTCUSDT", "BTC", 17.165456],
+    [48, "BTCUSDT", "USDT", 48.00],
+    [48.0000000000, "BTCUSDT", "BTC", 48.000000],
   ];
 
   differentCombination.forEach((combination) => {

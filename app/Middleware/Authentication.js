@@ -36,7 +36,6 @@ class Authentication {
       if (user.id !== token.payload.uid) throw new AuthentificationFailedException();
 
     } catch (e) {
-      console.log(e);
       throw new AuthentificationFailedException();
     }
     //if ok next middleware
