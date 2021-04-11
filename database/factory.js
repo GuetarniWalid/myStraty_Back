@@ -70,14 +70,14 @@ Factory.blueprint(
   }
 );
 
-Factory.blueprint("App/Models/Napoleon", () => {
+Factory.blueprint("App/Models/Napoleon", (faker, i, {strategy, title, active}) => {
   return {
     position: JSON.stringify({ BTC: 0.5, ETH: 0, USDT: 0.5 }),
-    strategy: "STRAT_BTC_ETH_USD_LO_D_1",
-    title: "BTC/ETH/USD LO",
+    strategy: strategy ?? "STRAT_BTC_ETH_USD_LO_D_1",
+    title: title ?? "BTC/ETH/USD LO",
     frequency: "daily",
     updated_at: "2021-03-03 09:40:47",
-    active: 1
+    active: active ?? 1
   };
 });
 

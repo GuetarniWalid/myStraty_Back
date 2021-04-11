@@ -2,6 +2,7 @@
 const Mail = use('Mail')
 const Event = use('Event')
 const Env = use("Env");
+const Napoleon = use('App/Models/Napoleon')
 
 
 /**
@@ -33,6 +34,9 @@ NapoleonListener.handleError = async (error) => {
  * @returns {void} 
  */
 NapoleonListener.handleSuccess = async () => {
+    let napoleonData = await Napoleon.all()
+
+
     await Mail.raw("<h3>La récupération des donné s'est déroulé avec succès !!!</h3>", (message) => {
         message.from(Env.get("MAIL_USERNAME"))
         message.to(Env.get("MAIL_ADMIN"))

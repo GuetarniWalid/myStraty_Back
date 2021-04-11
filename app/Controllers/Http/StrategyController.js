@@ -1,4 +1,7 @@
 "use strict";
+
+
+const NapoleonBot = use("App/Bots/NapoleonBot");
 const Napoleon = use("App/Models/Napoleon");
 const Strategy = use("App/Models/Strategy");
 const Exchange = use("App/Models/Exchange");
@@ -42,8 +45,20 @@ class StrategyController {
         user_id: userId,
         name: exchangeSelected,
       });
-      let strategy;
 
+      //check if the amount to be managed is greater than 40
+      if(amount < 40) {
+        return {
+           success: false,
+           details: {
+             type: 'management',
+             message: 'amount under management too small'
+           } 
+          };
+      }
+      
+      //create or reset a strategy
+      let strategy;
       try {
         strategy = await Strategy.findByOrFail({
           title: strat,
@@ -68,6 +83,25 @@ class StrategyController {
       strategy.active = true;
 
       await strategy.save();
+      //
+
+      
+      //get actual position
+      const napoleon = new NapoleonBot()
+      const currentPosition = await napoleon.getCurrentPosition(reference)
+      const currentFormatposition = napoleon.formatPositionBtcEthUsdt(currentPosition)
+      //
+
+      //launch trade order
+      const tradingBot = new TradingBot({
+        userId,
+        newPositions: currentFormatposition,
+        strategyId: strategy.id,
+        ExchangeData: exchange.toJSON(),
+      });
+
+      await tradingBot.startLogic();
+      //
 
       return {
         success: true,
