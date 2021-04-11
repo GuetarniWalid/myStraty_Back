@@ -5,8 +5,9 @@ const { MachineLearning } = require("aws-sdk");
 const moment = require("moment");
 const Napoleon = use("App/Models/Napoleon");
 const Mail = use("Mail");
+const Database = use('Database')
 
-const { test, before } = use("Test/Suite")("NapoleonBot");
+const { test, before, after } = use("Test/Suite")("NapoleonBot");
 
 before(async () => {
   await Factory.model("App/Models/Napoleon").create();
@@ -16,6 +17,10 @@ before(async () => {
     active: 0,
   });
 });
+
+after(async () => {
+  await Database.truncate('napoleons')
+})
 
 test("NapoleonBot get only Napoleon active strategies", async ({ assert }) => {
   const napoleonBot = new NapoleonBot();
