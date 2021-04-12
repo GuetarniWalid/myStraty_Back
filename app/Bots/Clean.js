@@ -15,8 +15,8 @@ class Clean {
   strategiesSorted = {};
   amountToSubstract = [];
 
-  constructor(user) {
-    this.userId = user.id;
+  constructor(userId) {
+    this.userId = userId;
   }
 
   async start() {

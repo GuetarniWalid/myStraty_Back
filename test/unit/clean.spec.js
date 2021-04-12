@@ -40,7 +40,7 @@ test("get only active strategies for one user and their echange id", async ({
   assert,
 }) => {
   //prepare test environment
-  const clean = new Clean(user);
+  const clean = new Clean(user.id);
   clean.user = user;
   //
   await clean.getActiveStrategies();
@@ -61,7 +61,7 @@ test("aggregate the amounts of all the strategies together", async ({
   assert,
 }) => {
   //prepare test environment
-  const clean = new Clean(user);
+  const clean = new Clean(user.id);
   clean.user = user;
   await clean.getActiveStrategies();
   //
@@ -81,7 +81,7 @@ test("get wallet balance on Binance exchange", async ({ assert }) => {
   newExchange.public_key = Env.get("BINANCE_REAL_PUBLIC_KEY");
   await newExchange.save();
 
-  const clean = new Clean(user);
+  const clean = new Clean(user.id);
   clean.user = user;
   //
 
@@ -96,11 +96,11 @@ test("get wallet balance on Binance exchange", async ({ assert }) => {
   oldExchange.private_key = Env.get("BINANCE_TEST_PRIVATE_KEY");
   oldExchange.public_key = Env.get("BINANCE_TEST_PUBLIC_KEY");
   await oldExchange.save();
-});
+}).timeout(0)
 
 test("verify if exchange has enough liquidity", async ({ assert }) => {
   //prepare test environment
-  const clean = new Clean(user);
+  const clean = new Clean(user.id);
   clean.user = user;
   //
 
@@ -142,7 +142,7 @@ test("determine the amount to substract if not enought liquidity", async ({
   assert,
 }) => {
   //prepare test environment
-  const clean = new Clean(user);
+  const clean = new Clean(user.id);
   clean.user = user;
 
   clean.currencyWithNotEnoughLiquidity = [
@@ -171,7 +171,7 @@ test("sort strategies by currency and increasing value for each currency in clea
   assert,
 }) => {
   //prepare test environment
-  const clean = new Clean(user);
+  const clean = new Clean(user.id);
   clean.user = user;
 
   clean.currencyWithNotEnoughLiquidity = [
@@ -200,7 +200,7 @@ test("substract the surplus amount for each strat", async ({
   assert,
 }) => {
   //prepare test environment
-  const clean = new Clean(user);
+  const clean = new Clean(user.id);
   clean.user = user;
 
   clean.amountToSubstract = [
@@ -340,7 +340,7 @@ test("check that all the methods work correctly together", async ({
   //
 
   //prepare test environment
-  const clean = new Clean(user);
+  const clean = new Clean(user.id);
   clean.user = user;
   //
 

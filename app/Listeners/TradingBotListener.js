@@ -35,11 +35,7 @@ TradingBotListener.getAllUser = async () => {
   //need to execute synchronously
   await Promise.all(
     users.map(async (user) => {
-      //a first clean of strategies active that have not enough liquidity in exchange
-        const clean = new Clean(user);
-        await clean.start();
-
-
+      
       for (const exchange of user.exchanges) {
         for (const strategy of exchange.strategies) {
           //start the trading bot for each strategy by user

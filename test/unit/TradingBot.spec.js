@@ -77,7 +77,7 @@ test("compare Napoleon positions with strategy positions", ({ assert }) => {
     //prepare test environment
     tradingBot.newPositions = combination.newPositions;
     tradingBot.strategyPosition = combination.strategyPosition;
-    //
+    
     tradingBot.compareNewPositionWithOldPosition();
 
     assert.deepEqual(
@@ -155,7 +155,7 @@ test("launch trading order for strategy long only", async ({ assert }) => {
     tradingBot.strategyPosition = combination.strategyPosition;
     await tradingBot.instantUsefulClass();
     await tradingBot.compareNewPositionWithOldPosition();
-    //
+    
 
     const orders = await tradingBot.tradingOrderForLongOnly();
 
@@ -213,10 +213,10 @@ test("save trade order data", async ({ assert }) => {
     side: "SELL",
   };
 
-  //prepare test environment
+  // prepare test environment
   const tradingBot = new TradingBot(data);
   await tradingBot.instantUsefulClass();
-  //
+  
 
   await tradingBot.saveNewData(order);
   const trade = await Trade.findBy("pair", order.symbol);
@@ -420,3 +420,56 @@ test("deactive user's strategy when his subscription is expire", async ({
     `deactivateStrategy method: bad number of trades passed to transform all currencies in usdt`
   );
 });
+
+test("test of calculPercent method", async ({assert}) => {
+  const tradingBot = new TradingBot(data);
+
+
+  //test 1
+  tradingBot.calculatedPosition = {
+    btc: -0.5,
+    eth: -0.5,
+    usdt: 1
+  }
+  tradingBot.strategyPosition = {
+    btc: 0.5,
+    eth: 0.5,
+    usdt: 0
+  }
+
+  const percentTest1BTC = tradingBot.calculPercent(['usdt'], 'btc')
+  const percentTest1ETH = tradingBot.calculPercent(['usdt'], 'eth')
+  assert.strictEqual(percentTest1BTC, 1, "method calculPercent : bad percent calculated")
+  assert.strictEqual(percentTest1ETH, 1, "method calculPercent : bad percent calculated")
+
+
+  //test 2
+  tradingBot.calculatedPosition = {
+    btc: -0.5,
+    eth: 0,
+    usdt: 0.5
+  }
+  tradingBot.strategyPosition = {
+    btc: 0.5,
+    eth: 0.5,
+    usdt: 0
+  }
+
+  const percentTest2BTC = tradingBot.calculPercent(['usdt'], 'btc')
+  assert.strictEqual(percentTest2BTC, 1, "method calculPercent : bad percent calculated")
+
+  //test 3
+  tradingBot.calculatedPosition = {
+    btc: -1,
+    eth: 0.5,
+    usdt: 0.5
+  }
+  tradingBot.strategyPosition = {
+    btc: 1,
+    eth: 0,
+    usdt: 0
+  }
+
+  const percentTest3BTC = tradingBot.calculPercent(['usdt', 'eth'], 'btc')
+  assert.strictEqual(percentTest3BTC, 0.5, "method calculPercent : bad percent calculated")
+})

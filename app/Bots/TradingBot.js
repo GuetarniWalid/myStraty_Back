@@ -6,22 +6,35 @@ const User = use("App/Models/User");
 const moment = require("moment");
 const Big = require("big.js");
 const Env = use("Env");
+const Clean = use("App/Bots/Clean");
 
 class TradingBot {
+  userId; //number
+  newPositions; //object
+  strategyId; //number
+  ExchangeData; //object
+  strategy; //model instance
+  binanceBot; //BinanceBot instance
+  strategyPosition; //object
+  BTC; //number
+  ETH; //number
+  USDT; //number
+  calculatedPosition; //object
+
   constructor(data) {
-    this.userId = data.userId; //number
-    this.newPositions = data.newPositions; //object
-    this.strategyId = data.strategyId; //number
-    this.ExchangeData = data.ExchangeData; //object
-    this.strategy; //model instance
-    this.binanceBot; //BinanceBot instance
-    this.strategyPosition; //object
-    this.BTC; //number
-    this.ETH; //number
-    this.USDT; //number
+    this.userId = data.userId;
+    this.newPositions = data.newPositions;
+    this.strategyId = data.strategyId;
+    this.ExchangeData = data.ExchangeData;
   }
 
   async startLogic() {
+    //a first clean of strategies active that have not enough liquidity in exchange
+    if (Env.get("NODE_ENV") != "test") {
+      const clean = new Clean(this.userId);
+      await clean.start();
+    }
+
     await this.instantUsefulClass();
 
     //calculate difference between old and new position
@@ -36,7 +49,6 @@ class TradingBot {
         await this.saveNewData(order);
       }
     }
-
   }
 
   async instantUsefulClass() {
@@ -91,20 +103,7 @@ class TradingBot {
       currenciesWin.forEach((currencyWin) => {
         currenciesLoss.forEach((currencyLoss) => {
           //calcul the percent of the order
-          //1-compare the arrays for determine the number of trades necessary, equal to the longest array
-          const nbOfTrades =
-            currenciesWin.length > currenciesLoss.length
-              ? currenciesWin.length
-              : currenciesLoss.length;
-
-          //2-the absolute value of percent losses for the currency that loss in value
-          const percentLoss = Math.abs(this.calculatedPosition[currencyLoss]);
-
-          //3-the old percent that the actual currency that loss had
-          const oldPercent = this.strategyPosition[currencyLoss];
-
-          //4-the calcul that determine the percent
-          const percent = percentLoss / nbOfTrades / oldPercent;
+          const percent = this.calculPercent(currenciesWin, currencyLoss);
 
           try {
             const order = this.binanceBot.fireSpotTrade(
@@ -124,6 +123,15 @@ class TradingBot {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  calculPercent(currenciesWin, currencyLoss) {
+    const oldPosition = this.strategyPosition[currencyLoss];
+    const calculatedPosition = this.calculatedPosition[currencyLoss];
+    const percentOfLoss = 1 - (oldPosition + calculatedPosition);
+
+    //the percent of losses is divided by the number of currencies that win in value
+    return percentOfLoss / currenciesWin.length;
   }
 
   async saveNewData(orderData) {
@@ -166,7 +174,9 @@ class TradingBot {
     }
 
     this.strategy[basePartOfPair] = this.formatNumber(baseCurrencyAmount);
+    this[basePartOfPair] = this.formatNumber(baseCurrencyAmount);
     this.strategy[secondPartOfPair] = this.formatNumber(secondCurrencyAmount);
+    this[secondPartOfPair] = this.formatNumber(secondCurrencyAmount);
 
     await this.strategy.save();
   }

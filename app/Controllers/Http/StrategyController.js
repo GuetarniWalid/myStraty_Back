@@ -92,6 +92,7 @@ class StrategyController {
       const currentFormatposition = napoleon.formatPositionBtcEthUsdt(currentPosition)
       //
 
+
       //launch trade order
       const tradingBot = new TradingBot({
         userId,
@@ -103,9 +104,11 @@ class StrategyController {
       await tradingBot.startLogic();
       //
 
+      const strategyUpdated = await Strategy.find(strategy.id)
+
       return {
         success: true,
-        userStrategy: strategy,
+        userStrategy: strategyUpdated,
       };
     } catch (e) {
       console.log(e);
