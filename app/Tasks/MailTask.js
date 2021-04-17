@@ -211,8 +211,8 @@ class MailTask extends Task {
     const assetSorting = new AssetSorting();
     try {
       const assetSortedByDay = await assetSorting.allDaily(user.id);
-      const lastTwoDays = assetSortedByDay.slice(-2);
-      return lastTwoDays;
+      const [yesterday, today, now] = assetSortedByDay.slice(-3);
+      return [yesterday, now];
     } catch (e) {
       console.log(e);
       return;

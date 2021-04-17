@@ -27,6 +27,16 @@ class Asset extends Model {
   static get updatedAtColumn() {
     return null;
   }
+
+  /**
+   * A relationship between assets and strategies table.
+   * One asset belongs to one strategy.
+   *
+   * @return {Object} One or many ORM object that represent strategies table
+   */
+  strategy() {
+    return this.belongsTo("App/Models/Strategy");
+  }
 }
 
 module.exports = Asset;

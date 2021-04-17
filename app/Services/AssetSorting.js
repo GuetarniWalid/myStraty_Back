@@ -13,11 +13,11 @@ class AssetSorting {
       .where("id", userId)
       .with("exchanges.strategies.asset")
       .fetch();
-    user = user.toJSON();
+    [user] = user.toJSON();
 
     //push all user's asset in this array
     const assets = [];
-    user[0].exchanges.map((exchange) => {
+    user.exchanges.map((exchange) => {
       exchange.strategies.map((strategy) => {
           if(strategy.asset) assets.push(strategy.asset);
       });

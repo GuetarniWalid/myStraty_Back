@@ -58,9 +58,9 @@ class Strategy extends Model {
 
   /**
    * A relationship between strategies and exchanges table.
-   * Several strategies can belong to one exchange.
+   * One strategy can belong to one exchange.
    *
-   * @return {Object} One or many ORM object that represent trades table
+   * @return {Object} One or many ORM object that represent exchanges table
    */
    exchange() {
     return this.belongsTo("App/Models/Exchange");
