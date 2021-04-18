@@ -19,7 +19,6 @@ class UpdateLastExchangeDatum extends Task {
         ETH: asset.strategy.eth,
         USDT: asset.strategy.usdt,
         ExchangeData: asset.strategy.exchange,
-        isTodayLastUpdate: true,
       });
 
       assetRecording.startLogic();

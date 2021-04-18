@@ -9,7 +9,6 @@ class AssetRecordingBot {
   USDT; //int
   ExchangeData; //object - exchanges model
   asset; //object - assets model
-  isTodayLastUpdate = false; //boolean
 
   constructor(data) {
     this.strategyId = data.strategyId;
@@ -24,7 +23,6 @@ class AssetRecordingBot {
         USDT: this.USDT,
       });
     }
-    if (data.isTodayLastUpdate) this.isTodayLastUpdate = true;
   }
 
   async startLogic() {
@@ -80,7 +78,7 @@ class AssetRecordingBot {
     amountByDate = JSON.parse(amountByDate);
 
     //prepare datas to push
-    const date = this.isTodayLastUpdate ? moment().toISOString() : moment().subtract(1, "days").toISOString();
+    const date = moment().toISOString();
     const newData = {
       date: date,
       BTC: totalBTC,
@@ -88,7 +86,7 @@ class AssetRecordingBot {
       USDT: totalUSDT,
     };
 
-    if (this.isTodayLastUpdate && moment().isSame(amountByDate[amountByDate.length - 1].date, 'day')) {
+    if (moment().isSame(amountByDate[amountByDate.length - 1].date, 'day')) {
       amountByDate[amountByDate.length - 1] = newData;
     } else {
       amountByDate.push(newData);

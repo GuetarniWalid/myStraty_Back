@@ -50,16 +50,6 @@ TradingBotListener.getAllUser = async () => {
             ExchangeData: exchange,
           });
           await tradingBot.startLogic();
-
-          //start recording amounts for each strategy by user
-          const assetRecordingBot = new AssetRecordingBot({
-            strategyId: strategy.id,
-            BTC: strategy.btc,
-            ETH: strategy.eth,
-            USDT: strategy.usdt,
-            ExchangeData: exchange,
-          });
-          await assetRecordingBot.startLogic();
         }
       }
     })
