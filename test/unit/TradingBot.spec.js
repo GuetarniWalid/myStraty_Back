@@ -154,7 +154,7 @@ test("launch trading order for strategy long only", async ({ assert }) => {
     tradingBot.newPositions = combination.newPositions;
     tradingBot.strategyPosition = combination.strategyPosition;
     await tradingBot.instantUsefulClass();
-    await tradingBot.compareNewPositionWithOldPosition();
+    tradingBot.compareNewPositionWithOldPosition();
     
 
     const orders = await tradingBot.tradingOrderForLongOnly();
@@ -345,11 +345,6 @@ test("all the methods work correctly together to place an order", async ({
 test("deactive user's strategy when his subscription is expire", async ({
   assert,
 }) => {
-  //reset database
-  const oldStrat = await Strategy.first();
-  await oldStrat.delete();
-  //
-
   const users = await Factory.model("App/Models/User").createMany(5);
   await Promise.all(
     users.map(async (user) => {

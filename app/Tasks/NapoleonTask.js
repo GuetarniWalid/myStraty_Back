@@ -8,9 +8,6 @@ const Task = use("Task");
  * @description Trigger all day at 23:45 the handle function that start NapoleonBot to get data from Napoleon platform
  */
 class NapoleonTask extends Task {
-  dateAlreadyChecked = true;
-  errorNum = 0;
-  interval = 60000;
 
   /**
    * @description A cron job that trigger NapoleonTask.handle() all day at 23:45

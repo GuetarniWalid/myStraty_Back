@@ -69,10 +69,6 @@ test("verify that users with invalid subscription are deactivate", async ({
       strategy.btc === 0 && strategy.eth === 0 && strategy.usdt === 0
   );
 
-  //get trades for deactivation
-  let trades = await Trade.all();
-  trades = trades.toJSON();
-
   assert.strictEqual(
     strategyNotActive.length,
     3,
