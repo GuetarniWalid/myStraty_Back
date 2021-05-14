@@ -2,8 +2,6 @@
 const User = use("App/Models/User");
 const Napoleon = use("App/Models/Napoleon");
 const TradingBot = use("App/Bots/TradingBot");
-const AssetRecordingBot = use("App/Bots/AssetRecordingBot");
-const Clean = use("App/Bots/Clean");
 
 const TradingBotListener = (exports = module.exports = {});
 

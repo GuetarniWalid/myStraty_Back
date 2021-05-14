@@ -12,12 +12,14 @@ test('verify asset is format correctly in JSON', async ({ assert }) => {
     amount_by_date: JSON.stringify([])
   };
 
+  //method to test
   const amountByDateStringify = assetRecordingBot.formatAmountByDateToJson(2, 10, 15000);
+  //
   const amountByDate = JSON.parse(amountByDateStringify);
   const lastAmountByDate = amountByDate[0];
 
   assert.deepInclude(lastAmountByDate, {BTC: 2, ETH: 10, USDT: 15000}, "method formatAmountByDateToJson: bad object formated")
-  assert.isTrue(moment().subtract(1, "days").isSame(lastAmountByDate.date, 'day'), "method formatAmountByDateToJson: bad object formated")
+  assert.isTrue(moment().isSame(lastAmountByDate.date, 'day'), "method formatAmountByDateToJson: bad object formated")
 
 })
 
@@ -40,6 +42,6 @@ test('verify that a new asset is save', async ({ assert }) => {
 
 
   assert.deepInclude(amountTested, {BTC: 2, ETH: 10, USDT: 15000}, "method formatAmountByDateToJson: bad object formated")
-  assert.isTrue(moment().subtract(1, "days").isSame(amountTested.date, 'day'), "method formatAmountByDateToJson: bad object formated")
+  assert.isTrue(moment().isSame(amountTested.date, 'day'), "method formatAmountByDateToJson: bad object formated")
 
 })

@@ -1,6 +1,6 @@
 "use strict";
 const Task = use("Task");
-const Asset = use("App/Models/Asset");
+const Strategy = use("App/Models/Strategy");
 const AssetRecording = use("App/Bots/AssetRecordingBot");
 
 class UpdateLastExchangeDatum extends Task {
@@ -10,15 +10,15 @@ class UpdateLastExchangeDatum extends Task {
 
   async handle() {
     // get all assets that belongs to an active strategy
-    const assetsActive = await this.getAssetsActive();
+    const strategiesActive = await this.getStrategiesActive();
 
-    assetsActive.forEach(async (asset) => {
+    strategiesActive.forEach(async (strategy) => {
       const assetRecording = new AssetRecording({
-        strategyId: asset.strategy.id,
-        BTC: asset.strategy.btc,
-        ETH: asset.strategy.eth,
-        USDT: asset.strategy.usdt,
-        ExchangeData: asset.strategy.exchange,
+        strategyId: strategy.id,
+        BTC: strategy.btc,
+        ETH: strategy.eth,
+        USDT: strategy.usdt,
+        ExchangeData: strategy.exchange,
       });
 
       assetRecording.startLogic();
@@ -26,16 +26,13 @@ class UpdateLastExchangeDatum extends Task {
 
   }
 
-  async getAssetsActive() {
-    const assetsActive = await Asset.query()
-      .whereHas("strategy", (builder) => {
-        builder.where("active", true);
-      })
-      .with("strategy")
-      .with("strategy.exchange")
+  async getStrategiesActive() {
+    const strategiesActive = await Strategy.query()
+      .where("active", true)
+      .with("exchange")
       .fetch();
 
-    return assetsActive.toJSON();
+    return strategiesActive.toJSON();
   }
 }
 

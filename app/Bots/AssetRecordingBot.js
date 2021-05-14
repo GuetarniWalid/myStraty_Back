@@ -86,7 +86,7 @@ class AssetRecordingBot {
       USDT: totalUSDT,
     };
 
-    if (moment().isSame(amountByDate[amountByDate.length - 1].date, 'day')) {
+    if (amountByDate[amountByDate.length - 1] && moment().isSame(amountByDate[amountByDate.length - 1].date, 'day')) {
       amountByDate[amountByDate.length - 1] = newData;
     } else {
       amountByDate.push(newData);
