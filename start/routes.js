@@ -141,5 +141,6 @@ Route.group(() => {
   //
   //Chat
     Route.get("chat/all/messages", "ChatController.all").middleware(["authentication", "expiry"]);
+    Route.get("chat/unread/number", "ChatController.numberUnread").middleware(["authentication", "expiry"]);
   //
 }).prefix("api/v1");

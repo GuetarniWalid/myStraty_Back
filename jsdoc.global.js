@@ -348,3 +348,21 @@
  *    }
  * }
  */
+
+
+/**
+ *
+ * @typedef {object} successNumberUnreadMessages
+ * @property {boolean} success - if token doesn't expiry
+ * @property {object} details - details about the error
+ * @property {string} details.type - unread messages
+ * @property {number} details.number - number of unread messages
+ * @example
+ * {
+ *   success: true,
+ *   details: {
+ *     type: 'unread messages',
+ *     number: 8
+ *   }
+ * }
+ */
