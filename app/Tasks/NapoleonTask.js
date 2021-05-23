@@ -10,10 +10,10 @@ const Task = use("Task");
 class NapoleonTask extends Task {
 
   /**
-   * @description A cron job that trigger NapoleonTask.handle() all day at 23:45
+   * @description A cron job that trigger NapoleonTask.handle() all day at 00:01
    */
   static get schedule() {
-    return "46 23 * * *";
+    return "01 00 * * *";
   }
 
   /**
